@@ -1,9 +1,17 @@
+// handles HTTP requests
+const http = require('http')
+const url = require('url')
 const TPLSmartDevice = require('tplink-lightbulb');
-var convert = require('color-convert');
+const convert = require('color-convert');
+// file stream lib
+const fs = require('fs')
+
 const lounge = '192.168.1.6'
 const light = new TPLSmartDevice(lounge)
 
-/*Turns lightOn*/
+/*Turns light On
+@param color: hex color string
+@param transition: optional transition time in milliseconds*/
 function change_color(color, transition=0) {
     var opt = {}
     var colors = convert.hex.hsl(color)
@@ -17,28 +25,25 @@ function change_color(color, transition=0) {
   .catch(err => console.error(err))             
 }
 
-function lightOff(bulbIP){
-
+function get_file(name) {
+    var file = fs.readFileSync(name, 'utf8')
+    return file
 }
 
-change_color('0000FF', 10000)
+change_color('#FF00FF')
+console.log('changed color')
 
-// // turn first discovered light off
-// const scan = lights_module.scan()
-//   .on('light', light => {
-//     light.power(false)
-//       .then(status => {
-//         console.log(status)
-//         scan.stop()
-//       })
-//   })
+function onRequest(request, response) {
+    var path = url.parse(request.url).pathname
+    if (path === '/r') {
+        change_color('ff0000')
+    } else if (path == '/g') {
+        change_color('00ff00')
+    } else if (path === '/b') {
+        change_color('0000ff')
+    }
+    response.write(get_file('index.html'))
+    response.end()
+}
 
-// const scan = lights_module.scan();
-// console.log(scan)
-
-// get info about a light
-// const light = new TPLSmartDevice('192.168.1.6')
-// light.info()
-//   .then(info => {
-//     console.log(info)
-//   })
+http.createServer(onRequest).listen(8000);
