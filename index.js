@@ -14,6 +14,7 @@ const lounge = '192.168.1.6'
 const light = new TPLSmartDevice(lounge)
 
 var mode = 0
+var modeCount = 2
 var transition = 1000
 
 /*Changes light color
@@ -44,12 +45,18 @@ function cycle_colors() {
                 sleep(transition)
                 break
             case 1:
-                change_color('0000ff', 100)
-                sleep(200)
-                change_color('ffffff', 100)
-                sleep(200)
+                change_color('0000ff', transition)
+                sleep(transition)
+                change_color('ffffff', transition)
+                sleep(transition)
                 break
-        }
+            case 2:
+                change_color('ffffff',transition)
+                sleep(transition)
+                change_color('000000',transition)
+                sleep(transition)
+                break
+            }
     }
 }
 
@@ -58,6 +65,13 @@ function get_file(name) {
     return file
 }
 
+function next_mode(){
+    if(mode==modeCount){
+        mode=0
+    }else{
+        mode+=1
+    }
+}
 function onRequest(request, response) {
     var path = url.parse(request.url).pathname
     console.log(path)
@@ -73,12 +87,12 @@ function onRequest(request, response) {
         if (transition > 0) {
             transition -= 100
         }
-    } else if (path === '/p/') {
-        if (mode == 0) {
-            mode = 1
-        } else if (mode == 1) {
-            mode = 0
-        }
+    } else if (path == '/style.css') {
+        response.write(get_file('style.css'))
+        response.end()
+        return
+    } else if (path === '/m/'){
+        next_mode()
     }
     response.write(get_file('index.html'))
     response.end()
