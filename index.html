@@ -1,8 +1,56 @@
 <html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" >
+        <link rel="stylesheet" type="text/css" href="/node_modules/bootstrap-arrow-buttons/dist/css/bootstrap-arrow-buttons.css" >
+        
+        <script>
+        function red() {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8000/r/",
+            });
+        }
+
+        function green() {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8000/g/",
+            });
+        }
+
+        function blue() {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8000/b/",
+            });
+        }
+
+        function decrease() {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8000/d/",
+            });
+        }
+
+        function increase() {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8000/u/",
+            });
+        }
+        </script>
+    </head>
     <body>
-        <a href="#r">Red</a>
-        <a href="#g">Blue</a>
-        <a href="#b">Green</a>
+        <button onclick="red()">Red</button>
+        <button onclick="green()">Green</button>
+        <button onclick="blue()">Blue</button>
+
+        <button onclick="decrease()">↓</button>
+        <button onclick="increase()">↑</button>
+
+        <button type="button" class="btn btn-default btn-arrow-left">Default</button>
+
         <!-- <button okclick=window.location.href='localhost:8000/r/'>Red</button>
         <button okclick=window.location.href='localhost:8000/g/'>Green</button>
         <button okclick=window.location.href='localhost:8000/b/'>Blue</button> -->
