@@ -35,12 +35,13 @@ console.log('changed color')
 
 function onRequest(request, response) {
     var path = url.parse(request.url).pathname
-    if (path === '/r') {
-        change_color('ff0000')
-    } else if (path == '/g') {
-        change_color('00ff00')
-    } else if (path === '/b') {
-        change_color('0000ff')
+    console.log(path)
+    if (path === '/r/') {
+        change_color('#FF0000')
+    } else if (path == '/g/') {
+        change_color('#00FF00')
+    } else if (path === '/b/') {
+        change_color('#0000FF')
     }
     response.write(get_file('index.html'))
     response.end()
