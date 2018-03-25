@@ -51,9 +51,9 @@ function cycle_colors() {
                 sleep(transition)
                 break
             case 2:
-                change_color('ffffff',transition)
+                change_color('ffffff')
                 sleep(transition)
-                change_color('000000',transition)
+                change_color('000000')
                 sleep(transition)
                 break
             }
@@ -96,6 +96,10 @@ function onRequest(request, response) {
     }
     response.write(get_file('index.html'))
     response.end()
+}
+
+function changeTransition(changeAmount){
+
 }
 
 http.createServer(onRequest).listen(8000);
