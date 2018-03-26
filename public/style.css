@@ -96,3 +96,11 @@ body {
 .player{
     margin: 50px 0;
   }
+
+input.ms {
+    max-width: 35px;
+}
+
+input.jscolor{
+    max-width:60px;
+}

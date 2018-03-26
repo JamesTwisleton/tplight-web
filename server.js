@@ -28,6 +28,9 @@ app.get('/style.css',function(req,res){
 app.get('/client.js',function(req,res){
     res.send(client.js);
 });
+app.get('/jscolor.js',function(req,res){
+    res.send(jscolor.js);
+});
 app.get('/speedup', function(req, res){
     if (transition >= 50) {
         transition -= 50
@@ -46,6 +49,11 @@ app.get('/transition', function(req, res){
 app.get('/changetransition', function(req, res){    
     transition = req.query.transition
 });
+
+app.get('/changecolor', function(req, res){    
+    change_color(req.query.color) 
+});
+
 app.get('/start', function(req, res){    
     console.log("start invoked")
     cycling=true
@@ -55,6 +63,9 @@ app.get('/start', function(req, res){
 app.get('/stop', function(req, res){    
     cycling=false
     console.log("stop invoked")
+});
+app.get('/mode', function(req, res){    
+    next_mode()
 });
 
 app.listen(3000);

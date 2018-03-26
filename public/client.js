@@ -4,6 +4,11 @@
 var transition;
 
 /**
+ * For the play/pause button.
+ */
+var state = 'stop';
+
+/**
  * Asks the server to speed up the current cycle, sets relevant HTML elements
  * to match new transition speed.
  */
@@ -43,7 +48,7 @@ function slowDown(){
  */
 function changeTransition(){
     var lastClick = 0;
-    var delay = 500;
+    var delay = 50;
     if (lastClick >= (Date.now() - delay)){
         return
     }    
@@ -55,6 +60,20 @@ function changeTransition(){
     req.open("GET","/changetransition?transition="+sliderToTransition,true);
     req.send(null);
     getTransition();
+}
+
+function changeColor(){
+    var lastClick = 0;
+    var delay = 50;
+    if (lastClick >= (Date.now() - delay)){
+        return
+    }    
+    lastClick = Date.now();
+
+    colorvalue = document.getElementById("colorvalue");
+    var req = new XMLHttpRequest();
+    req.open("GET","/changecolor?color="+colorvalue.value,true);
+    req.send(null);
 }
 
 /**
@@ -109,6 +128,22 @@ function stop(){
 }
 
 /**
+ * Stops cycle
+ */
+function nextMode(){
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function() { 
+        if (req.readyState == 4 && req.status == 200){
+            transitionReadout = document.getElementById("transitionReadout");
+            transitionReadout.value = req.responseText;
+            getTransition();
+        }
+    }
+    req.open("GET","/mode",true);
+    req.send(null);     
+}
+
+/**
  * Sets transition from server on page load, sets a timer to refresh the transition
  * every 10 seconds from the server.
  */
@@ -119,9 +154,6 @@ window.onload = function(){
     transition = getTransition();
     }, 10000);
 }
-
-
-var state = 'stop';
 
 function buttonPlayPress() {
     var buttonIcon = document.getElementById("buttonIcon");
