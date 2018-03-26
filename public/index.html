@@ -43,13 +43,11 @@
             req.send(null);
         }
 
+        /*Refresh slider every 10 seconds*/
         setInterval(function () {
-        var oReq = new XMLHttpRequest();
-        oReq.addEventListener("load", reqListener);
-        oReq.open("GET", "/transition");
-        oReq.send();
-        }, 3000);
-
+        getTransition();
+        }, 10000);
+        
         getTransition();
 
         </script>
