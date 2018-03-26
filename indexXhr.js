@@ -12,19 +12,27 @@ res.send(style.css);
 });
 
 app.get('/speedup', function(req, res){
-    if (transition > 0) {
-        transition -= 100
+    if (transition >= 50) {
+        transition -= 50
     }
     res.send(transition.toString());
 });
 
 app.get('/slowdown', function(req, res){
-    transition += 100    
-    res.send(transition.toString());
+    if (transition <= 5000){
+        transition += 50    
+        res.send(transition.toString());
+    }
+    
 });
 
 app.get('/transition', function(req, res){    
     res.send(transition.toString());
+});
+
+app.get('/changetransition', function(req, res){    
+    transition = req.query.transition
+    console.log(req.query.transition)
 });
 
 app.listen(3000);

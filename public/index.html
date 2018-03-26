@@ -6,27 +6,47 @@
             <link rel="stylesheet" href="style.css">    
         <script>
 
+        var transition;
+
         function speedUp(){
             var req = new XMLHttpRequest();            
             req.onreadystatechange = function() { 
                 if (req.readyState == 4 && req.status == 200)
-                    document.body.innerHTML += req.responseText + '&lt;br&gt;';
+                    transitionReadout = document.getElementById("transitionReadout");
+                    transitionReadout.value = req.responseText;
+                    getTransition();
             }
-
             req.open("GET","/speedup",true);
             req.send(null);
-            getTransition();
         }
 
         function slowDown(){
             var req = new XMLHttpRequest();
             req.onreadystatechange = function() { 
                 if (req.readyState == 4 && req.status == 200)
-                    document.body.innerHTML += req.responseText + '&lt;br&gt;';
+                    transitionReadout = document.getElementById("transitionReadout");
+                    transitionReadout.value = req.responseText;
+                    getTransition();
             }
-
             req.open("GET","/slowdown",true);
-            req.send(null);
+            req.send(null);     
+        }
+
+        window.onload = function(){ 
+            transition = getTransition();
+            /*Refresh slider every 10 seconds*/
+            setInterval(function () {
+            transition = getTransition();
+            }, 10000);
+        };
+
+        function changeTransition(){
+            transitionSlider = document.getElementById("transitionSlider");
+            var req = new XMLHttpRequest();
+            sliderToTransition=5000-transitionSlider.value;
+            req.open("GET","/changetransition?transition="+sliderToTransition,true);
+            console.log(transitionSlider.value)
+            req.send();
             getTransition();
         }
 
@@ -36,20 +56,15 @@
                 if (req.readyState == 4 && req.status == 200)
                     transition = req.responseText;
                     transitionSlider = document.getElementById("transitionSlider");
-                    transitionSlider.value = transition;
+                    transitionSlider.value = 5000-transition;
+                    transitionReadout = document.getElementById("transitionReadout");
+                    transitionReadout.value = transition;
             }
 
             req.open("GET","/transition",true);
             req.send(null);
+            return transition;
         }
-
-        /*Refresh slider every 10 seconds*/
-        setInterval(function () {
-        getTransition();
-        }, 10000);
-        
-        getTransition();
-
         </script>
     </head>
     <body>
@@ -62,7 +77,8 @@
                 </div>
                 <div>
                     <div class="slidecontainer">
-                        <input type="range" min="0" max="10000" class="slider" id="transitionSlider">
+                        <input type="range" min="0" max="5000" class="slider" oninput="changeTransition()" id="transitionSlider">
+                        <input type="text" id="transitionReadout">
                     </div>
                 </div>
             </div>
