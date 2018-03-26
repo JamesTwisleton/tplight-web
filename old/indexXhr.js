@@ -11,6 +11,10 @@ app.get('/style.css',function(req,res){
 res.send(style.css);
 });
 
+app.get('/client.js',function(req,res){
+    res.send(client.js);
+    });
+
 app.get('/speedup', function(req, res){
     if (transition >= 50) {
         transition -= 50
@@ -48,8 +52,8 @@ var sleep = require('system-sleep');
 // file stream lib
 const fs = require('fs')
 
-// const lounge = '192.168.1.6'
-const lounge = '192.168.1.7'
+const lounge = '192.168.1.6'
+//const lounge = '192.168.1.7'
 const light = new TPLSmartDevice(lounge)
 
 var mode = 0

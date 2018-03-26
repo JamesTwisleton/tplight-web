@@ -2,93 +2,36 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-            <link rel="stylesheet" href="style.css">    
-        <script>
-
-        var transition;
-
-        function speedUp(){
-            var req = new XMLHttpRequest();            
-            req.onreadystatechange = function() { 
-                if (req.readyState == 4 && req.status == 200)
-                    transitionReadout = document.getElementById("transitionReadout");
-                    transitionReadout.value = req.responseText;
-                    getTransition();
-            }
-            req.open("GET","/speedup",true);
-            req.send(null);
-        }
-
-        function slowDown(){
-            var req = new XMLHttpRequest();
-            req.onreadystatechange = function() { 
-                if (req.readyState == 4 && req.status == 200)
-                    transitionReadout = document.getElementById("transitionReadout");
-                    transitionReadout.value = req.responseText;
-                    getTransition();
-            }
-            req.open("GET","/slowdown",true);
-            req.send(null);     
-        }
-
-        window.onload = function(){ 
-            transition = getTransition();
-            /*Refresh slider every 10 seconds*/
-            setInterval(function () {
-            transition = getTransition();
-            }, 10000);
-        };
-
-        function changeTransition(){
-            transitionSlider = document.getElementById("transitionSlider");
-            var req = new XMLHttpRequest();
-            sliderToTransition=5000-transitionSlider.value;
-            req.open("GET","/changetransition?transition="+sliderToTransition,true);
-            console.log(transitionSlider.value)
-            req.send();
-            getTransition();
-        }
-
-        function getTransition(){
-            var req = new XMLHttpRequest();
-            req.onreadystatechange = function() { 
-                if (req.readyState == 4 && req.status == 200)
-                    transition = req.responseText;
-                    transitionSlider = document.getElementById("transitionSlider");
-                    transitionSlider.value = 5000-transition;
-                    transitionReadout = document.getElementById("transitionReadout");
-                    transitionReadout.value = transition;
-            }
-
-            req.open("GET","/transition",true);
-            req.send(null);
-            return transition;
-        }
-        </script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css">    
+        <script src ="client.js"></script>
+        <script src="https://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
     </head>
     <body>
         <div class="container-fluid" style="text-align:center;">
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-lg-12 col-xl-12">
+                    <button type="button" class="btn btn-default btn-sm" onclick='buttonPlayPress()'>
+                            <span id="buttonIcon" class="glyphicon glyphicon-play"></span>
+                    </button>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-lg-3 col-xl-3">
                     <button onclick="slowDown()" class="btn btn-danger btn-arrow-left">Slower</button>
-                    <button onclick="modeChange()" type="button" class="btn btn-link">Mode</button>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6 col-xl-6">
+                    <input type="range" min="0" max="5000" class="slider" oninput="changeTransition()" step="50" id="transitionSlider">
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-lg-3 col-xl-3">
                     <button onclick="speedUp()" class="btn btn-success btn-arrow-right">Faster</button>
                 </div>
-                <div>
-                    <div class="slidecontainer">
-                        <input type="range" min="0" max="5000" class="slider" oninput="changeTransition()" id="transitionSlider">
-                        <input type="text" id="transitionReadout">
-                    </div>
+            <div class="row">
+                <div class="slidecontainer">
+                    <input type="text" id="transitionReadout">
+                    <button onclick="modeChange()" type="button" class="btn btn-link">Mode</button>
                 </div>
             </div>
+            </div>
         </div>
-        <!-- <button onclick="red()">Red</button> -->
-        <!-- <button onclick="green()">Green</button> -->
-        <!-- <button onclick="blue()">Blue</button> -->
-
-        <!-- <button okclick=window.location.href='localhost:8000/r/'>Red</button>
-        <button okclick=window.location.href='localhost:8000/g/'>Green</button>
-        <button okclick=window.location.href='localhost:8000/b/'>Blue</button> -->
     </body>
 </html>
