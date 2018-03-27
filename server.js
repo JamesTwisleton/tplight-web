@@ -11,6 +11,7 @@ var mode = 0
 var modeCount = 2
 var transition = 1000
 var cycling = false
+var globalColor = '000000'
 
 /**
  * Express server setup.
@@ -46,6 +47,9 @@ app.get('/slowdown', function(req, res){
 app.get('/transition', function(req, res){    
     res.send(transition.toString());
 });
+app.get('/color', function(req, res){    
+    res.send(globalColor);
+});
 app.get('/changetransition', function(req, res){    
     transition = req.query.transition
 });
@@ -77,7 +81,8 @@ app.listen(3000);
  * @param {*} transition optional transition time in milliseconds
  */
 function change_color(color, transition=0) {
-    var opt = {}
+    globalColor = color;
+    var opt = {};
     var colors = convert.hex.hsl(color)
     opt.hue = colors[0]
     opt.saturation = colors[1]

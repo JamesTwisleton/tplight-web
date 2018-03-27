@@ -72,8 +72,9 @@ function changeColor(){
 
     colorvalue = document.getElementById("colorvalue");
     var req = new XMLHttpRequest();
-    req.open("GET","/changecolor?color="+colorvalue.value,true);
+    req.open("GET","/changecolor?color="+colorValue.value,true);
     req.send(null);
+    getColor();
 }
 
 /**
@@ -95,6 +96,17 @@ function getTransition(){
     return transition;
 }
 
+function getColor(){
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function() { 
+        if (req.readyState == 4 && req.status == 200){
+            document.getElementById('colorValue').jscolor.fromString(req.responseText);
+        }
+    }
+    req.open("GET","/color",true);
+    req.send(null);
+}
+
 /**
  * Starts cycle
  */
@@ -105,6 +117,7 @@ function start(){
             transitionReadout = document.getElementById("transitionReadout");
             transitionReadout.value = req.responseText;
             getTransition();
+            getColor();
         }
     }
     req.open("GET","/start",true);
@@ -149,9 +162,11 @@ function nextMode(){
  */
 window.onload = function(){ 
     transition = getTransition();
+    getColor();
     /*Refresh slider every 10 seconds*/
     setInterval(function () {
     transition = getTransition();
+    getColor();
     }, 10000);
 }
 
