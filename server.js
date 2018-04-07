@@ -4,9 +4,9 @@
 const TPLSmartDevice = require('tplink-lightbulb');
 const convert = require('color-convert');
 var sleep = require('system-sleep');
-const bulb = '192.168.1.6'
-//const bulb2 = '192.168.1.7'
-const light = new TPLSmartDevice(bulb)
+const bulb = ['192.168.1.6']
+const port_no = 3000
+const light = new TPLSmartDevice(bulb[0])
 var mode = 0
 var modeCount = 2
 var transition = 1000
@@ -72,7 +72,7 @@ app.get('/mode', function(req, res){
     next_mode()
 });
 
-app.listen(3000);
+app.listen(port_no);
 
 /**
  * Changes light color
@@ -86,7 +86,7 @@ function change_color(color, transition=0) {
     var colors = convert.hex.hsl(color)
     opt.hue = colors[0]
     opt.saturation = colors[1]
-    opt.brightness = colors[2]
+    opt.brightness = 100
     light.power(true,transition,opt)
     .then(status => {
         console.log(status)
@@ -118,7 +118,7 @@ function cycle_colors() {
                 sleep(transition)
                 break
             }
-    }while(cycling==true);
+    } while(cycling==true);
 }
 
 function next_mode(){
