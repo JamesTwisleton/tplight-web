@@ -118,7 +118,9 @@ function change_color(color, brightness=100, transition=0) {
 }
 
 function cycle_colors() {
-    do{
+    // just to clear active color
+    change_color('0000ff', 100, 0)
+    do {
         switch (patternMode) {
             // whole rgb
             case 0:
