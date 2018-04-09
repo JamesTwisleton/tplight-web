@@ -95,7 +95,7 @@ app.get('/mode', function(req, res) {
     res.send(transition.toString());
 });
 
-app.listen(80)
+app.listen(port_no)
 
 /**
  * Changes light color
