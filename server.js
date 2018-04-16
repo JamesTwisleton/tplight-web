@@ -5,10 +5,10 @@ const TPLSmartDevice = require('tplink-lightbulb');
 const convert = require('color-convert');
 var sleep = require('system-sleep');
 
-const bulb = ['81.100.30.252']
-//const bulb = ['192.168.1.7']
+//const bulb = ['81.100.30.252']
+const bulb = ['192.168.1.6']
 
-const port_no = 8080
+const port_no = 80
 const light = new TPLSmartDevice(bulb[0])
 // static or cycling
 var cycling = false
