@@ -47,20 +47,35 @@
 .btn-arrow-left:before { /* align the "before" square to the left */
     left: -11px;
 }
+
 .btn-arrow-right:after,
 .btn-arrow-left:after { /* align the "after" square to the right */
     right: -11px;
 }
+
 .btn-arrow-right:after,
 .btn-arrow-left:before { /* bring arrow pointers to front */
     z-index: 1;
 }
+
 .btn-arrow-right:before,
 .btn-arrow-left:after { /* hide arrow tails background */
-    background-color: white;
+    background-color: #2d2d2d;
 }
+
+.btn-default {
+    color: white;
+    border-color: white;
+    background-color: #2d2d2d;
+}
+
+input.jscolor {
+    border: 0px;
+}
+
 body {
     padding: 1em;
+    background-color: #2d2d2d;
 }
 
 .slider {
