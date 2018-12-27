@@ -1,16 +1,23 @@
 /**
- * Instance variable setup
+ * Imports
  */
 const TPLSmartDevice = require('tplink-lightbulb');
 const convert = require('color-convert');
 var sleep = require('system-sleep');
+var config = require('./config/config');
 
-//const bulb = ['81.100.30.252']
-const bulb = ['192.168.1.6']
-
-const port_no = 80
+/**
+ * Bulb setup
+ */
+const bulb = [config.colorBulbIP];
+const port_no = config.portNumber;
 const light = new TPLSmartDevice(bulb[0])
-// static or cycling
+
+
+/**
+ * Pattern globals
+ */
+ // static or cycling
 var cycling = false
 // which pattern
 var patternMode = 0
