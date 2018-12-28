@@ -1,6 +1,7 @@
 { 
     "portNumber": "80", 
-    "colorBulbIP": "192.168.1.6", 
-    "whiteBulbIP": "192.168.1.7" 
+    "colorBulbIP": "192.168.1.10", 
+    "whiteBulbIP": "192.168.1.7",
+    "colorBulb2IP": "192.168.1.6"
 }
 

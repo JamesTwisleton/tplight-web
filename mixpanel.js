@@ -1,40 +1,41 @@
+'use strict';
 /**
  * Imports
  */
 const TPLSmartDevice = require('tplink-lightbulb');
 const convert = require('color-convert');
-var sleep = require('system-sleep');
-var config = require('./config/config');
+const sleep = require('system-sleep');
+const config = require('./config/config');
+const express = require('express');
+const app = express();
 
 /**
  * Bulb setup
  */
 const bulb = [config.colorBulbIP];
 const port_no = config.portNumber;
-const light = new TPLSmartDevice(bulb[0])
-
+const light = new TPLSmartDevice(bulb[0]);
 
 /**
  * Pattern globals
- */
- // static or cycling
-var cycling = false
-// which pattern
-var patternMode = 0
-var patternModeCount = 4
-var transition = 1000
-var globalColor = '000000'
+*/
+var cycling = false;
+var patternMode = 0;
+var patternModeCount = 4;
+var transition = 1000;
+var globalColor = '000000';
 
 /**
  * Express server setup.
  */
-'use strict';
-var express = require('express');
-var app = express();
 app.use(express.static(`${__dirname}/public`));
 app.get('/', function(req, res){
     res.set("Connection", "close");
     res.send(index.html);
+});
+app.get('/mixpanel.html', function(req, res){
+    res.set("Connection", "close");
+    res.send(mixpanel.html);
 });
 app.get('/style.css',function(req,res){ 
     res.set("Connection", "close");
@@ -75,14 +76,12 @@ app.get('/changetransition', function(req, res) {
     console.log(req.query.transition)   
     transition = parseInt(req.query.transition)
 });
-
 app.get('/changecolor', function(req, res) {
     console.log("color change")
     change_color(req.query.color)
     res.set("Connection", "close");
     res.send(transition.toString());
 });
-
 app.get('/start', function(req, res) {
     console.log("start invoked")
     cycling = true
@@ -101,7 +100,6 @@ app.get('/mode', function(req, res) {
     res.set("Connection", "close");
     res.send(transition.toString());
 });
-
 app.listen(port_no)
 
 /**
@@ -113,15 +111,15 @@ app.listen(port_no)
 function change_color(color, brightness=100, transition=0) {
     globalColor = color;
     var opt = {};
-    var colors = convert.hex.hsl(color)
-    opt.hue = colors[0]
-    opt.saturation = colors[1]
-    opt.brightness = brightness
+    var colors = convert.hex.hsl(color);
+    opt.hue = colors[0];
+    opt.saturation = colors[1];
+    opt.brightness = brightness;
     light.power(true,transition,opt)
     .then(status => {
         // just commented out so
         // I could see other output
-        // console.log(status)
+        console.log(status)
   })
   .catch(err => console.error(err))             
 }
@@ -164,5 +162,5 @@ function cycle_colors() {
 }
 
 function next_mode() {
-    patternMode = (patternMode + 1) % patternModeCount
+    patternMode = (patternMode + 1) % patternModeCount;
 }

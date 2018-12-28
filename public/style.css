@@ -119,3 +119,10 @@ input.ms {
 input.jscolor{
     max-width:60px;
 }
+
+.glyphicon.glyphicon-arrow-down {
+    font-size: 75px;
+}
+.glyphicon.glyphicon-arrow-up {
+    font-size: 75px;
+}
