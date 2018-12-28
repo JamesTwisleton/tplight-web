@@ -147,32 +147,32 @@ function cycle_colors() {
         switch (patternMode) {
             // whole rgb
             case 0:
-                change_color('ff0000', 100, transition)
+                change_color('ff0000', 100, 0)
                 sleep(transition)
-                change_color('00ff00', 100, transition)
+                change_color('00ff00', 100, 0)
                 sleep(transition)
-                change_color('0000ff', 100, transition)
+                change_color('0000ff', 100, 0)
                 sleep(transition)
                 break
             // red and blue
             case 1:
-                change_color('ff0000', 100, transition)
+                change_color('ff0000', 100, 0)
                 sleep(transition)
-                change_color('0000ff', 100, transition)
+                change_color('0000ff', 100, 0)
                 sleep(transition)
                 break
             // blue and white
             case 2:
-                change_color('0000ff', 100, transition)
+                change_color('0000ff', 100, 0)
                 sleep(transition)
-                change_color('ffffff', 100, transition)
+                change_color('ffffff', 100, 0)
                 sleep(transition)
                 break
             // white strobe
             case 3:            
-                change_color('ffffff', 100, transition)
+                change_color('ffffff', 100, 0)
                 sleep(transition)
-                change_color('000000', 0, transition)
+                change_color('000000', 0, 0)
                 sleep(transition)
                 break
             }
