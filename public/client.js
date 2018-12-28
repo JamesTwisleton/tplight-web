@@ -83,7 +83,7 @@ function changeColor(){
 }
 
 /**
- * Sets the transition slider and readout to match the server value, returns transition value.
+ * Sets the bpm readout to match the server value, returns transition value.
  */
 function getBpm(){
     var req = new XMLHttpRequest();
@@ -96,7 +96,7 @@ function getBpm(){
     }
     req.open("GET","/bpm",true);
     req.send(null);
-    return bpm;
+    //return bpm;
 }
 
 /**
@@ -110,7 +110,7 @@ function getTransition(){
             transitionSlider = document.getElementById("transitionSlider");
             transitionSlider.value = 5000-transition;
             transitionReadout = document.getElementById("transitionReadout");
-            transitionReadout.value = transition;
+            //transitionReadout.value = transition;
         }
     }
     req.open("GET","/transition",true);
@@ -163,7 +163,7 @@ function stop(){
 }
 
 /**
- * Stops cycle
+ * Changes to next mode
  */
 function nextMode(){
     var req = new XMLHttpRequest();
@@ -175,6 +175,37 @@ function nextMode(){
         }
     }
     req.open("GET","/mode",true);
+    req.send(null);     
+}
+
+
+
+/**
+ * Turns on fade
+ */
+function fadeOn(){
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function() { 
+        if (req.readyState == 4 && req.status == 200){
+            getBpm();
+        }
+    }
+    req.open("GET","/fadeon",true);
+    req.send(null);     
+}
+
+
+/**
+ * Turns off fade
+ */
+function fadeOff(){
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function() { 
+        if (req.readyState == 4 && req.status == 200){
+            getBpm();
+        }
+    }
+    req.open("GET","/fadeoff",true);
     req.send(null);     
 }
 
@@ -213,11 +244,16 @@ function buttonFadePress() {
     if(fade==false){
       fade=true;
       fadeOn();
-      console.log("fade turned on");
     }
-    else if(state=='play'){
-      state = 'stop';
-      stop();
-      console.log("fade turned off");
+    else if(fade==true){
+      fade=false;
+      fadeOff();
     }
 }
+
+
+$(function() {
+    $('#toggle-event').change(function() {
+        buttonFadePress();
+    })
+  })

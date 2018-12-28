@@ -24,6 +24,8 @@ var patternMode = 0;
 var patternModeCount = 4;
 var bpm = 60;
 var transition = 60000 / bpm;
+var fade = transition/5;
+var fadeOn = false;
 var globalColor = '000000';
 
 /**
@@ -102,22 +104,44 @@ app.get('/mode', function (req, res) {
     res.set("Connection", "close");
     res.send(bpm.toString());
 });
+app.get('/fadeon', function (req, res) {
+    fade_on();
+    res.set("Connection", "close");
+    res.send(bpm.toString());
+});
+app.get('/fadeoff', function (req, res) {
+    fade_off();
+    res.set("Connection", "close");
+    res.send(bpm.toString());
+});
 app.listen(port_no)
 
 function speed_up() {
     if (bpm < 200) {
-        bpm = bpm + 10;
+        bpm = bpm + 1;
         transition = 60000 / bpm;
+        fade = transition/5;
         console.log("speed up");
     }
 }
 
 function slow_down() {
     if (bpm > 10) {
-        bpm = bpm - 10;
+        bpm = bpm - 1;
         transition = 60000 / bpm;
+        fade = transition/5;
         console.log("slow down");
     }
+}
+
+function fade_on(){
+    console.log("fade on");
+    fadeOn = true;
+}
+
+function fade_off(){
+    console.log("fade off");
+    fadeOn = false;
 }
 
 /**
@@ -133,6 +157,11 @@ function change_color(color, brightness = 100, transition = 0) {
     opt.hue = colors[0];
     opt.saturation = colors[1];
     opt.brightness = brightness;
+
+    if(fadeOn==false){
+        transition=0;
+    }
+
     light.power(true, transition, opt)
         .then(status => {
             // just commented out so
@@ -149,32 +178,32 @@ function cycle_colors() {
         switch (patternMode) {
             // whole rgb
             case 0:
-                change_color('ff0000', 100, 0)
+                change_color('ff0000', 100, fade)
                 sleep(transition)
-                change_color('00ff00', 100, 0)
+                change_color('00ff00', 100, fade)
                 sleep(transition)
-                change_color('0000ff', 100, 0)
+                change_color('0000ff', 100, fade)
                 sleep(transition)
                 break
             // red and blue
             case 1:
-                change_color('ff0000', 100, 0)
+                change_color('ff0000', 100, fade)
                 sleep(transition)
-                change_color('0000ff', 100, 0)
+                change_color('0000ff', 100, fade)
                 sleep(transition)
                 break
             // blue and white
             case 2:
-                change_color('0000ff', 100, 0)
+                change_color('0000ff', 100, fade)
                 sleep(transition)
-                change_color('ffffff', 100, 0)
+                change_color('ffffff', 100, fade)
                 sleep(transition)
                 break
             // white strobe
             case 3:
-                change_color('ffffff', 100, 0)
+                change_color('ffffff', 100, fade)
                 sleep(transition)
-                change_color('000000', 0, 0)
+                change_color('000000', 0, fade)
                 sleep(transition)
                 break
         }
