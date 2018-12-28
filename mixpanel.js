@@ -23,99 +23,99 @@ var cycling = false;
 var patternMode = 0;
 var patternModeCount = 4;
 var bpm = 60;
-var transition = 60000/bpm;
+var transition = 60000 / bpm;
 var globalColor = '000000';
 
 /**
  * Express server setup.
  */
 app.use(express.static(`${__dirname}/public`));
-app.get('/', function(req, res){
+app.get('/', function (req, res) {
     res.set("Connection", "close");
     res.send(index.html);
 });
-app.get('/mixpanel.html', function(req, res){
+app.get('/mixpanel.html', function (req, res) {
     res.set("Connection", "close");
     res.send(mixpanel.html);
 });
-app.get('/style.css',function(req,res){ 
+app.get('/style.css', function (req, res) {
     res.set("Connection", "close");
     res.send(style.css);
 });
-app.get('/client.js',function(req,res){
+app.get('/client.js', function (req, res) {
     res.set("Connection", "close");
     res.send(client.js);
 });
-app.get('/jscolor.js',function(req,res){
+app.get('/jscolor.js', function (req, res) {
     res.set("Connection", "close");
     res.send(jscolor.js);
 });
-app.get('/speedup', function(req, res){
+app.get('/speedup', function (req, res) {
     speed_up();
     res.set("Connection", "close");
     res.send(bpm.toString());
 
 });
-app.get('/slowdown', function(req, res){
+app.get('/slowdown', function (req, res) {
     slow_down();
     res.set("Connection", "close");
     res.send(bpm.toString());
 
 });
-app.get('/transition', function(req, res) {
-    res.set("Connection", "close");   
+app.get('/transition', function (req, res) {
+    res.set("Connection", "close");
     res.send(bpm.toString());
 });
-app.get('/bpm', function(req, res) {
-    res.set("Connection", "close");   
+app.get('/bpm', function (req, res) {
+    res.set("Connection", "close");
     res.send(bpm.toString());
 });
-app.get('/color', function(req, res) {
+app.get('/color', function (req, res) {
     res.set("Connection", "close");
     res.send(globalColor);
 });
-app.get('/changetransition', function(req, res) { 
-    console.log(req.query.transition)   
+app.get('/changetransition', function (req, res) {
+    console.log(req.query.transition)
     transition = parseInt(req.query.transition)
 });
-app.get('/changecolor', function(req, res) {
+app.get('/changecolor', function (req, res) {
     console.log("color change")
     change_color(req.query.color);
     res.set("Connection", "close");
     res.send(bpm.toString());
 });
-app.get('/start', function(req, res) {
+app.get('/start', function (req, res) {
     console.log("start invoked")
     cycling = true
     cycle_colors()
     res.set("Connection", "close");
     res.send(bpm.toString());
 });
-app.get('/stop', function(req, res) {
+app.get('/stop', function (req, res) {
     console.log("stop invoked")
     cycling = false
     res.set("Connection", "close");
     res.send(bpm.toString());
 });
-app.get('/mode', function(req, res) {    
+app.get('/mode', function (req, res) {
     next_mode()
     res.set("Connection", "close");
     res.send(bpm.toString());
 });
 app.listen(port_no)
 
-function speed_up(){
+function speed_up() {
     if (bpm < 200) {
         bpm = bpm + 10;
-        transition = 60000/bpm;
+        transition = 60000 / bpm;
         console.log("speed up");
     }
 }
 
-function slow_down(){
-    if (bpm > 60) {
+function slow_down() {
+    if (bpm > 10) {
         bpm = bpm - 10;
-        transition = 60000/bpm;
+        transition = 60000 / bpm;
         console.log("slow down");
     }
 }
@@ -126,24 +126,26 @@ function slow_down(){
  * @param {*} color hex color string 
  * @param {*} transition optional transition time in milliseconds
  */
-function change_color(color, brightness=100, transition=0) {
+function change_color(color, brightness = 100, transition = 0) {
     globalColor = color;
     var opt = {};
     var colors = convert.hex.hsl(color);
     opt.hue = colors[0];
     opt.saturation = colors[1];
     opt.brightness = brightness;
-    light.power(true,transition,opt)
-    .then(status => {
-        // just commented out so
-        // I could see other output
-        console.log(status)
-  })
+    light.power(true, transition, opt)
+        .then(status => {
+            // just commented out so
+            // I could see other output
+            console.log(status)
+        })
+        .catch(err => console.error(err))
   .catch(err => console.error(err))             
+        .catch(err => console.error(err))
 }
 
 function cycle_colors() {
-    do{
+    do {
         switch (patternMode) {
             // whole rgb
             case 0:
@@ -169,13 +171,13 @@ function cycle_colors() {
                 sleep(transition)
                 break
             // white strobe
-            case 3:            
+            case 3:
                 change_color('ffffff', 100, 0)
                 sleep(transition)
                 change_color('000000', 0, 0)
                 sleep(transition)
                 break
-            }
+        }
     } while (cycling == true);
 }
 

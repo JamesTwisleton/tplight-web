@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="style.css">
     <script src="client.js"></script>
     <script src="jscolor.js" charset="utf-8"></script>
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
 </head>
 
 <body>
@@ -27,12 +30,9 @@
                             </button>
                         </div>
                         <div class="container-fluid col-xs-6">
-                            <button onclick="nextMode()" type="button" class="btn btn-default btn-block">
-                                <span id="buttonIcon" class="glyphicon glyphicon-refresh"></span>
-                            </button>
+                            <input type="checkbox" class="fade-toggle align-middle" onclick="buttonFadePress()" data-toggle="toggle" data-on="FADE ON"
+                                data-off="FADE OFF" data-size="mini" data-width="100%" data-onstyle="success" data-offstyle="danger">
                         </div>
-
-
                     </div>
                 </div>
             </div>

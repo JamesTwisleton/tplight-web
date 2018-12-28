@@ -9,6 +9,11 @@ var transition;
 var state = 'stop';
 
 /**
+ * Sets fade to on or off
+ */
+var fade = false;
+
+/**
  * Asks the server to speed up the current cycle, sets relevant HTML elements
  * to match new transition speed.
  */
@@ -200,5 +205,19 @@ function buttonPlayPress() {
       buttonIcon.className = "glyphicon glyphicon-play";
       stop();
       console.log("stop invoked")
+    }
+}
+
+function buttonFadePress() {
+    var fadeButton = document.getElementById("fadeButton");
+    if(fade==false){
+      fade=true;
+      fadeOn();
+      console.log("fade turned on");
+    }
+    else if(state=='play'){
+      state = 'stop';
+      stop();
+      console.log("fade turned off");
     }
 }

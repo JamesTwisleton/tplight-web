@@ -167,6 +167,13 @@ p.bpm{
     font-style: bold;
 }
 
-.toggles{
-    color:red;
+
+input.fade-toggle {
+    max-width: 100%;
+    font-size: 118px;
+    font-family: lcd;
+    color: 5DFF00;
+    background-color: black;
+    text-align: center;
+    padding: 20px 0px 0px 0px;
 }
