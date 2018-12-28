@@ -22,7 +22,7 @@ const light = new TPLSmartDevice(bulb[0]);
 var cycling = false;
 var patternMode = 0;
 var patternModeCount = 4;
-var transition = 1000;
+var transition = 999;
 var globalColor = '000000';
 
 /**

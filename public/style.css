@@ -1,3 +1,9 @@
+@font-face {
+    font-family: lcd;
+    src: url(Technology.ttf);
+    font-weight: bold;
+  }
+
 .btn-arrow-right,
 .btn-arrow-left {
     position: relative;
@@ -112,8 +118,15 @@ body {
     margin: 50px 0;
   }
 
-input.ms {
-    max-width: 35px;
+input.transition-readout {
+    max-width: 100%;
+    font-size: 118px;
+    font-family: lcd;
+    color: 5DFF00;
+    background-color: black;
+    vertical-align: center;
+    text-align: center;
+    padding: 20px 0px 0px 0px;
 }
 
 input.jscolor{
