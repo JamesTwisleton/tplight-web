@@ -22,7 +22,8 @@ const light = new TPLSmartDevice(bulb[0]);
 var cycling = false;
 var patternMode = 0;
 var patternModeCount = 4;
-var transition = 999;
+var bpm = 60;
+var transition = 60000/bpm;
 var globalColor = '000000';
 
 /**
@@ -50,23 +51,24 @@ app.get('/jscolor.js',function(req,res){
     res.send(jscolor.js);
 });
 app.get('/speedup', function(req, res){
-    if (transition >= 50) {
-        transition -= 50
-        console.log("speed up")
-        res.set("Connection", "close");
-        res.send(transition.toString());
-    }
+    speed_up();
+    res.set("Connection", "close");
+    res.send(bpm.toString());
+
 });
 app.get('/slowdown', function(req, res){
-    if (transition < 5000) {
-        transition += 50
-        res.set("Connection", "close");
-        res.send(transition.toString());
-    }
+    slow_down();
+    res.set("Connection", "close");
+    res.send(bpm.toString());
+
 });
 app.get('/transition', function(req, res) {
     res.set("Connection", "close");   
-    res.send(transition.toString());
+    res.send(bpm.toString());
+});
+app.get('/bpm', function(req, res) {
+    res.set("Connection", "close");   
+    res.send(bpm.toString());
 });
 app.get('/color', function(req, res) {
     res.set("Connection", "close");
@@ -78,29 +80,45 @@ app.get('/changetransition', function(req, res) {
 });
 app.get('/changecolor', function(req, res) {
     console.log("color change")
-    change_color(req.query.color)
+    change_color(req.query.color);
     res.set("Connection", "close");
-    res.send(transition.toString());
+    res.send(bpm.toString());
 });
 app.get('/start', function(req, res) {
     console.log("start invoked")
     cycling = true
     cycle_colors()
     res.set("Connection", "close");
-    res.send(transition.toString());
+    res.send(bpm.toString());
 });
 app.get('/stop', function(req, res) {
     console.log("stop invoked")
     cycling = false
     res.set("Connection", "close");
-    res.send(transition.toString());
+    res.send(bpm.toString());
 });
 app.get('/mode', function(req, res) {    
     next_mode()
     res.set("Connection", "close");
-    res.send(transition.toString());
+    res.send(bpm.toString());
 });
 app.listen(port_no)
+
+function speed_up(){
+    if (bpm < 200) {
+        bpm = bpm + 10;
+        transition = 60000/bpm;
+        console.log("speed up");
+    }
+}
+
+function slow_down(){
+    if (bpm > 60) {
+        bpm = bpm - 10;
+        transition = 60000/bpm;
+        console.log("slow down");
+    }
+}
 
 /**
  * Changes light color

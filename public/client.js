@@ -16,9 +16,9 @@ function speedUp(){
     var req = new XMLHttpRequest();            
     req.onreadystatechange = function() { 
         if (req.readyState == 4 && req.status == 200){
-            transitionReadout = document.getElementById("transitionReadout");
-            transitionReadout.value = req.responseText;
-            getTransition();
+            bpm = document.getElementById("bpmReadout");
+            bpm.value = req.responseText;
+            getBpm();
         }
     }
     req.open("GET","/speedup",true);
@@ -33,9 +33,9 @@ function slowDown(){
     var req = new XMLHttpRequest();
     req.onreadystatechange = function() { 
         if (req.readyState == 4 && req.status == 200){
-            transitionReadout = document.getElementById("transitionReadout");
-            transitionReadout.value = req.responseText;
-            getTransition();
+            bpm = document.getElementById("bpmReadout");
+            bpm.value = req.responseText;
+            getBpm();
         }
     }
     req.open("GET","/slowdown",true);
@@ -59,7 +59,7 @@ function changeTransition(){
     sliderToTransition=5000-transitionSlider.value;
     req.open("GET","/changetransition?transition="+sliderToTransition,true);
     req.send(null);
-    getTransition();
+    getBpm();
 }
 
 function changeColor(){
@@ -75,6 +75,23 @@ function changeColor(){
     req.open("GET","/changecolor?color="+colorValue.value,true);
     req.send(null);
     getColor();
+}
+
+/**
+ * Sets the transition slider and readout to match the server value, returns transition value.
+ */
+function getBpm(){
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function() { 
+        if (req.readyState == 4 && req.status == 200){
+            bpm = req.responseText;
+            bpmReadout = document.getElementById("bpmReadout");
+            bpmReadout.value = bpm;
+        }
+    }
+    req.open("GET","/bpm",true);
+    req.send(null);
+    return bpm;
 }
 
 /**
@@ -114,9 +131,9 @@ function start(){
     var req = new XMLHttpRequest();
     req.onreadystatechange = function() { 
         if (req.readyState == 4 && req.status == 200){
-            transitionReadout = document.getElementById("transitionReadout");
+            transitionReadout = document.getElementById("bpmReadout");
             transitionReadout.value = req.responseText;
-            getTransition();
+            getBpm();
             getColor();
         }
     }
@@ -133,7 +150,7 @@ function stop(){
         if (req.readyState == 4 && req.status == 200){
             transitionReadout = document.getElementById("transitionReadout");
             transitionReadout.value = req.responseText;
-            getTransition();
+            getBpm();
         }
     }
     req.open("GET","/stop",true);
@@ -149,7 +166,7 @@ function nextMode(){
         if (req.readyState == 4 && req.status == 200){
             transitionReadout = document.getElementById("transitionReadout");
             transitionReadout.value = req.responseText;
-            getTransition();
+            getBpm();
         }
     }
     req.open("GET","/mode",true);
@@ -161,7 +178,7 @@ function nextMode(){
  * every 10 seconds from the server.
  */
 window.onload = function(){ 
-    transition = getTransition();
+    transition = getBpm();
     getColor();
     /*Refresh slider every 10 seconds*/
     setInterval(function () {

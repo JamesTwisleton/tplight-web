@@ -124,7 +124,16 @@ input.transition-readout {
     font-family: lcd;
     color: 5DFF00;
     background-color: black;
-    vertical-align: center;
+    text-align: center;
+    padding: 20px 0px 0px 0px;
+}
+
+input.bpm-readout {
+    max-width: 100%;
+    font-size: 118px;
+    font-family: lcd;
+    color: 5DFF00;
+    background-color: black;
     text-align: center;
     padding: 20px 0px 0px 0px;
 }
@@ -138,4 +147,26 @@ input.jscolor{
 }
 .glyphicon.glyphicon-arrow-up {
     font-size: 75px;
+}
+
+.glyphicon.glyphicon-play {
+    font-size: 30px;
+}
+
+.glyphicon.glyphicon-refresh {
+    font-size: 30px;
+}
+
+.glyphicon.glyphicon-pause {
+    font-size: 30px;
+}
+
+
+p.bpm{
+    color:red; 
+    font-style: bold;
+}
+
+.toggles{
+    color:red;
 }

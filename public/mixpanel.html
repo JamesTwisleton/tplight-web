@@ -1,91 +1,113 @@
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="style.css">    
-        <script src ="client.js"></script>
-        <script src="jscolor.js"  charset="utf-8"></script>
-    </head>
-    <body>
-        <div class="container-fluid" style="text-align:center;">
-            <br>
-            <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6 col-xl-6">
-                    <input type="text" class="transition-readout" id="transitionReadout">
-                    <p style="color:white;">ms</p>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="client.js"></script>
+    <script src="jscolor.js" charset="utf-8"></script>
+</head>
+
+<body>
+    <div class="container-fluid" style="text-align:center;">
+        <br>
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6 col-xl-6">
+                <div class="align-top">
+                    <input type="text" class="bpm-readout" id="bpmReadout">
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6 col-xl-6">
-                    <button onclick="speedUp()" class="btn btn-success glyphicon glyphicon-arrow-up btn-block"></button>
-                    <br>
-                    <button onclick="slowDown()" class="btn btn-danger glyphicon glyphicon-arrow-down btn-block"></button>
+                <br>
+                <div class="align-bottom">
+                    <div class="row">
+                        <div class="container-fluid col-xs-6">
+                            <button type="button" class="btn btn-default btn-block" onclick='buttonPlayPress()'>
+                                <span id="buttonIcon" class="glyphicon glyphicon-play"></span>
+                            </button>
+                        </div>
+                        <div class="container-fluid col-xs-6">
+                            <button onclick="nextMode()" type="button" class="btn btn-default btn-block">
+                                <span id="buttonIcon" class="glyphicon glyphicon-refresh"></span>
+                            </button>
+                        </div>
+
+
+                    </div>
                 </div>
-        
             </div>
-            <div class="row">
-                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-lg-3 col-xl-3">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6 col-xl-6">
+                <button onclick="speedUp()" class="btn btn-success glyphicon glyphicon-arrow-up btn-block"></button>
+                <br>
+                <button onclick="slowDown()" class="btn btn-danger glyphicon glyphicon-arrow-down btn-block"></button>
             </div>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <div class="row">
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6 col-xl-6">
-                    <input type="range" min="0" max="5000" class="slider" oninput="changeTransition()" step="50" id="transitionSlider">
-                </div>
-                <button type="button" class="btn btn-default btn-sm" onclick='buttonPlayPress()'>
-                        <span id="buttonIcon" class="glyphicon glyphicon-play"></span>
-                </button>
-                <button onclick="nextMode()" type="button" class="btn btn-default btn-sm">
-                    <span id="buttonIcon" class="glyphicon glyphicon-refresh"></span>
-                </button>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-lg-3 col-xl-3">
             </div>
             <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <div class="row">
-                <input class="jscolor" value="" id="colorValue" onchange='changeColor()'>
-                <!-- <button type="button" class="btn btn-default btn-sm" >
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6 col-xl-6">
+                <input type="range" min="0" max="5000" class="slider" oninput="changeTransition()" step="50" id="transitionSlider">
+            </div>
+            <button type="button" class="btn btn-default btn-sm" onclick='buttonPlayPress()'>
+                <span id="buttonIcon" class="glyphicon glyphicon-play"></span>
+            </button>
+            <button onclick="nextMode()" type="button" class="btn btn-default btn-sm">
+                <span id="buttonIcon" class="glyphicon glyphicon-refresh"></span>
+            </button>
+        </div>
+        <br>
+        <div class="row">
+            <input class="jscolor" value="" id="colorValue" onchange='changeColor()'>
+            <!-- <button type="button" class="btn btn-default btn-sm" >
                     <span id="buttonIcon" class="glyphicon glyphicon-send"></span>
                 </button> -->
 
-            </div>
         </div>
-        
-    </body>
+    </div>
+
+</body>
+
 </html>
