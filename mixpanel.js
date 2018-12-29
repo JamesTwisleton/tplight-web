@@ -120,7 +120,7 @@ function speed_up() {
     if (bpm < 200) {
         bpm = bpm + 1;
         transition = 60000 / bpm;
-        fade = transition/5;
+        fade = transition/3;
         console.log("speed up");
     }
 }
@@ -129,7 +129,7 @@ function slow_down() {
     if (bpm > 10) {
         bpm = bpm - 1;
         transition = 60000 / bpm;
-        fade = transition/5;
+        fade = transition/3;
         console.log("slow down");
     }
 }
@@ -161,12 +161,11 @@ function change_color(color, brightness = 100, transition = 0) {
     if(fadeOn==false){
         transition=0;
     }
-
     light.power(true, transition, opt)
         .then(status => {
             // just commented out so
             // I could see other output
-            console.log(status)
+            //console.log(status)
         })
         .catch(err => console.error(err))
   .catch(err => console.error(err))             
