@@ -36,22 +36,6 @@ app.get('/', function (req, res) {
     res.set("Connection", "close");
     res.send(index.html);
 });
-app.get('/mixpanel.html', function (req, res) {
-    res.set("Connection", "close");
-    res.send(mixpanel.html);
-});
-app.get('/style.css', function (req, res) {
-    res.set("Connection", "close");
-    res.send(style.css);
-});
-app.get('/client.js', function (req, res) {
-    res.set("Connection", "close");
-    res.send(client.js);
-});
-app.get('/jscolor.js', function (req, res) {
-    res.set("Connection", "close");
-    res.send(jscolor.js);
-});
 app.get('/speedup', function (req, res) {
     speed_up();
     res.set("Connection", "close");
@@ -212,3 +196,6 @@ function cycle_colors() {
 function next_mode() {
     patternMode = (patternMode + 1) % patternModeCount;
 }
+
+//bug where fade only works when speed up or slow down hasnt been pressed (although, over a certain BPM I think it's irrelevant)
+//if bulb is white, it doesn't work. if bulb is yellow, it does

@@ -4,6 +4,25 @@
     font-weight: bold;
   }
 
+@font-face {
+    font-family: pizza;
+    src: url(pepperoni_pizza.ttf);
+    font-weight: bold;
+  }
+
+@font-face {
+    font-family: futura-pt-bold-oblique;
+    src: url(futura-pt-bold-oblique.otf);
+    font-weight: bold;
+  }
+
+  @font-face {
+    font-family: futura-demi-bold;
+    src: url(futura-demi-bold.otf);
+    font-weight: bold;
+  }
+
+
 .btn-arrow-right,
 .btn-arrow-left {
     position: relative;
@@ -76,7 +95,11 @@
 }
 
 input.jscolor {
-    border: 0px;
+    font-size: 12px;
+    padding: 0px 5px 0px 5px;
+    width:100%;
+    align:center
+
 }
 
 body {
@@ -135,13 +158,13 @@ input.bpm-readout {
     color: 5DFF00;
     background-color: black;
     text-align: center;
+    border: none;
     padding: 20px 0px 0px 0px;
-    
+    border-radius: 1rem;
+
 }
 
-input.jscolor{
-    max-width:60px;
-}
+
 
 .glyphicon.glyphicon-arrow-down {
     font-size: 75px;
@@ -178,3 +201,33 @@ input.fade-toggle {
     text-align: center;
     padding: 20px 0px 0px 0px;
 }
+
+p.colour-title {
+    max-width: 100%;
+    font-size: 26px;
+    font-family: futura-demi-bold;
+    color: white;
+    text-align: center;
+}
+
+tr td{
+    padding: 0px 5px 5px 0px;
+    margin: 0 !important;
+
+  }
+
+  input{
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: medium solid transparent;
+
+    }
+
+p.main-title {
+        max-width: 100%;
+        font-size: 40px;
+        font-family: futura-demi-bold;
+        color: white;
+        text-align: center;
+    }
