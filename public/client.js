@@ -280,6 +280,9 @@ function changePattern(pattern) {
  * every 5 seconds from the server.
  */
 window.onload = function () {
+    document.getElementById("colorValue0").disabled = true;
+
+
     getColors(0);
     getBpm();
     getColor();

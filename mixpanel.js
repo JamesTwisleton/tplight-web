@@ -24,14 +24,6 @@ var colors4 = config.pattern4;
 var colors5 = config.pattern5;
 
 
-
-console.log(colors0);
-console.log(colors1);
-console.log(colors2);
-console.log(colors3);
-console.log(colors4);
-console.log(colors5);
-
 /**
  * Pattern globals
 */
@@ -77,7 +69,7 @@ app.get('/color', function (req, res) {
     res.send(globalColor);
 });
 app.get('/changetransition', function (req, res) {
-    console.log(req.query.transition)
+  
     transition = parseInt(req.query.transition)
 });
 app.get('/changecolor', function (req, res) {
@@ -124,14 +116,13 @@ app.get('/fading', function (req, res) {
 });
 app.get('/changepattern', function (req, res) {
     patternMode = parseInt(req.query.pattern);
-    console.log(patternMode);
     console.log("pattern change : " + req.query.pattern);
     res.set("Connection", "close");
     res.send(bpm.toString());
 });
 app.get('/colors', function (req, res) {
     var patternRequested = parseInt(req.query.pattern);
-    console.log(patternRequested);
+    console.log("pattern requested: " + patternRequested);
     res.set("Connection", "close");
 
     switch (patternMode) {
@@ -165,7 +156,7 @@ function speed_up() {
     if (bpm < 200) {
         bpm = bpm + 1;
         transition = 60000 / bpm;
-        fade = transition / 3;
+        fade = Math.round(transition / 4);
         console.log("speed up");
     }
 }
@@ -174,7 +165,7 @@ function slow_down() {
     if (bpm > 10) {
         bpm = bpm - 1;
         transition = 60000 / bpm;
-        fade = transition / 3;
+        fade = Math.round(transition / 4);
         console.log("slow down");
     }
 }
@@ -205,6 +196,8 @@ function change_color(color, brightness = 100, transition = 0) {
 
     if (fadeOn == false) {
         transition = 0;
+    }else{
+        transition = fade;
     }
     light.power(true, transition, opt)
         .then(status => {
@@ -223,16 +216,22 @@ function cycle_colors() {
         switch (patternMode) {
             case 0:
                 change_color(colors0.color0, 100, fade)
+                console.log(fade);
                 sleep(transition)
                 change_color(colors0.color1, 100, fade)
+                console.log(fade);
                 sleep(transition)
                 change_color(colors0.color2, 100, fade)
+                console.log(fade);
                 sleep(transition)
                 change_color(colors0.color3, 100, fade)
+                console.log(fade);
                 sleep(transition)
                 change_color(colors0.color4, 100, fade)
+                console.log(fade);
                 sleep(transition)
                 change_color(colors0.color5, 100, fade)
+                console.log(fade);
                 sleep(transition)
                 change_color(colors0.color6, 100, fade)
                 sleep(transition)
@@ -275,7 +274,6 @@ function cycle_colors() {
                 change_color(colors2.color7, 100, fade)
                 sleep(transition)
                 break
-
             case 3:
                 change_color(colors3.color0, 100, fade)
                 sleep(transition)
