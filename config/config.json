@@ -2,6 +2,79 @@
     "portNumber": "80", 
     "colorBulbIP": "192.168.1.8", 
     "whiteBulbIP": "192.168.1.7",
-    "colorBulb2IP": "192.168.1.6"
+    "colorBulb2IP": "192.168.1.6",
+
+    "pattern0": 
+    {
+        "color0": "ff0000",
+        "color1": "00ff00",
+        "color2": "0000ff",
+        "color3": "ff0000",
+        "color4": "00ff00",
+        "color5": "0000ff",
+        "color6": "ff0000",
+        "color7": "00ff00"
+    
+    },
+    "pattern1": 
+    {
+        "color0": "ff0000",
+        "color1": "000000",
+        "color2": "000000",
+        "color3": "ff0000",
+        "color4": "00ff00",
+        "color5": "0000ff",
+        "color6": "ff0000",
+        "color7": "00ff00"
+    
+    },
+    "pattern2": 
+    {
+        "color0": "ff0000",
+        "color1": "00ff00",
+        "color2": "0000ff",
+        "color3": "ff0000",
+        "color4": "00ff00",
+        "color5": "0000ff",
+        "color6": "ff0000",
+        "color7": "00ff00"
+    
+    },
+    "pattern3": 
+    {
+        "color0": "ff0000",
+        "color1": "00ff00",
+        "color2": "0000ff",
+        "color3": "ff0000",
+        "color4": "00ff00",
+        "color5": "0000ff",
+        "color6": "ff0000",
+        "color7": "00ff00"
+    
+    },
+    "pattern4": 
+    {
+        "color0": "ff0000",
+        "color1": "00ff00",
+        "color2": "0000ff",
+        "color3": "ff0000",
+        "color4": "00ff00",
+        "color5": "0000ff",
+        "color6": "ff0000",
+        "color7": "00ff00"
+    
+    },
+    "pattern5": 
+    {
+        "color0": "ff0000",
+        "color1": "00ff00",
+        "color2": "0000ff",
+        "color3": "ff0000",
+        "color4": "00ff00",
+        "color5": "0000ff",
+        "color6": "ff0000",
+        "color7": "00ff00"
+    
+    }
 }
 

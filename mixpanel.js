@@ -16,6 +16,22 @@ const bulb = [config.colorBulbIP];
 const port_no = config.portNumber;
 const light = new TPLSmartDevice(bulb[0]);
 
+var colors0 = config.pattern0;
+var colors1 = config.pattern1;
+var colors2 = config.pattern2;
+var colors3 = config.pattern3;
+var colors4 = config.pattern4;
+var colors5 = config.pattern5;
+
+
+
+console.log(colors0);
+console.log(colors1);
+console.log(colors2);
+console.log(colors3);
+console.log(colors4);
+console.log(colors5);
+
 /**
  * Pattern globals
 */
@@ -28,12 +44,6 @@ var fade = transition / 5;
 var fadeOn = false;
 var globalColor = '000000';
 
-var colors = [
-    ['ff0000', '00ff00', '0000ff','ff0000', '00ff00', '0000ff','ff0000', '00ff00'],
-    ['000000', 'ff0000', '000000','ff0000', '000000', 'ff0000','000000', 'ff0000'],
-    ['000000', '00ff00', '000000','00ff00', '000000', '00ff00','000000', '00ff00'],
-    ['000000', '0000ff', '000000','0000ff', '000000', '0000ff','000000', '0000ff'],
-];
 /**
  * Express server setup.
  */
@@ -123,10 +133,33 @@ app.get('/colors', function (req, res) {
     var patternRequested = parseInt(req.query.pattern);
     console.log(patternRequested);
     res.set("Connection", "close");
-    res.send(colors[patternRequested].toString());
+
+    switch (patternMode) {
+        case 0:
+            res.send(colors0);
+            break
+        case 1:
+            res.send(colors1);
+            break
+        case 2:
+            res.send(colors2);
+            break
+        case 3:
+            res.send(colors3);
+            break
+        case 4:
+            res.send(colors4);
+            break
+        case 5:
+            res.send(colors5);
+            break
+
+    }
 });
 
 app.listen(port_no)
+
+
 
 function speed_up() {
     if (bpm < 200) {
@@ -190,21 +223,21 @@ function cycle_colors() {
         switch (patternMode) {
             // whole rgb
             case 0:
-                change_color(colors[0][0], 100, fade)
+                change_color(colors0.color0, 100, fade)
                 sleep(transition)
-                change_color(colors[0][1], 100, fade)
+                change_color(colors0.color1, 100, fade)
                 sleep(transition)
-                change_color(colors[0][2], 100, fade)
+                change_color(colors0.color2, 100, fade)
                 sleep(transition)
-                change_color(colors[0][3], 100, fade)
+                change_color(colors0.color3, 100, fade)
                 sleep(transition)
-                change_color(colors[0][4], 100, fade)
+                change_color(colors0.color4, 100, fade)
                 sleep(transition)
-                change_color(colors[0][5], 100, fade)
+                change_color(colors0.color5, 100, fade)
                 sleep(transition)
-                change_color(colors[0][6], 100, fade)
+                change_color(colors0.color6, 100, fade)
                 sleep(transition)
-                change_color(colors[0][7], 100, fade)
+                change_color(colors0.color7, 100, fade)
                 sleep(transition)
                 break
             // red and blue

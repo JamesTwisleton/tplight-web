@@ -124,31 +124,31 @@ function getTransition() {
 }
 
 function getColor() {
-    var req = new XMLHttpRequest();
-    req.onreadystatechange = function () {
-        if (req.readyState == 4 && req.status == 200) {
-            document.getElementById('colorValue').jscolor.fromString(req.responseText);
-        }
-    }
-    req.open("GET", "/color", true);
-    req.send(null);
+    // var req = new XMLHttpRequest();
+    // req.onreadystatechange = function () {
+    //     if (req.readyState == 4 && req.status == 200) {
+    //         document.getElementById('colorValue').jscolor.fromString(req.responseText);
+    //     }
+    // }
+    // req.open("GET", "/color", true);
+    // req.send(null);
 }
 
 function getColors(pattern) {
     var req = new XMLHttpRequest();
     req.onreadystatechange = function () {
         if (req.readyState == 4 && req.status == 200) {
-            var colors = req.responseText;
-            var arr = colors.split(',');
-
-            document.getElementById('colorValue0').jscolor.fromString(arr[0]);
-            document.getElementById('colorValue1').jscolor.fromString(arr[1]);
-            document.getElementById('colorValue2').jscolor.fromString(arr[2]);
-            document.getElementById('colorValue3').jscolor.fromString(arr[3]);
-            document.getElementById('colorValue4').jscolor.fromString(arr[4]);
-            document.getElementById('colorValue5').jscolor.fromString(arr[5]);
-            document.getElementById('colorValue6').jscolor.fromString(arr[6]);
-            document.getElementById('colorValue7').jscolor.fromString(arr[7]);
+            var colors = JSON.parse(req.responseText);
+            
+            console.log(colors.color0);
+            document.getElementById('colorValue0').jscolor.fromString(colors.color0);
+            document.getElementById('colorValue1').jscolor.fromString(colors.color1);
+            document.getElementById('colorValue2').jscolor.fromString(colors.color2);
+            document.getElementById('colorValue3').jscolor.fromString(colors.color3);
+            document.getElementById('colorValue4').jscolor.fromString(colors.color4);
+            document.getElementById('colorValue5').jscolor.fromString(colors.color5);
+            document.getElementById('colorValue6').jscolor.fromString(colors.color6);
+            document.getElementById('colorValue7').jscolor.fromString(colors.color7);
         }
     }
     req.open("GET", "/colors?pattern="+pattern, true);
@@ -268,7 +268,7 @@ function getToggles() {
 
 function changePattern(pattern) {
     patternMode = pattern;  
-    getColors(pattern);
+    getColors(patternMode);
     var req = new XMLHttpRequest();
     req.open("GET", "/changepattern?pattern=" + pattern, true);
     req.send(null);
@@ -287,7 +287,7 @@ window.onload = function () {
 
     /*Refresh slider every 5 seconds*/
     setInterval(function () {
-        getColors(pattern);
+        getColors(patternMode);
         getBpm();
         getColor();
         //getToggles();
