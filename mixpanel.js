@@ -19,7 +19,7 @@ const light = new TPLSmartDevice(bulb[0]);
 /**
  * Pattern globals
 */
-var cycling = false;
+var cyclingOn = false;
 var patternMode = 0;
 var patternModeCount = 4;
 var bpm = 60;
@@ -72,14 +72,14 @@ app.get('/changecolor', function (req, res) {
 });
 app.get('/start', function (req, res) {
     console.log("start invoked")
-    cycling = true
+    cyclingOn = true
     cycle_colors()
     res.set("Connection", "close");
     res.send(bpm.toString());
 });
 app.get('/stop', function (req, res) {
     console.log("stop invoked")
-    cycling = false
+    cyclingOn = false
     res.set("Connection", "close");
     res.send(bpm.toString());
 });
@@ -98,6 +98,20 @@ app.get('/fadeoff', function (req, res) {
     res.set("Connection", "close");
     res.send(bpm.toString());
 });
+app.get('/cycling', function (req, res) {
+    res.set("Connection", "close");
+    res.send(cyclingOn);
+});
+app.get('/fading', function (req, res) {
+    res.set("Connection", "close");
+    res.send(fadeOn);
+});
+app.get('/changepattern', function (req, res) {
+    console.log("pattern change : " + req.query.pattern);
+    res.set("Connection", "close");
+    res.send(bpm.toString());
+});
+
 app.listen(port_no)
 
 function speed_up() {
@@ -190,7 +204,7 @@ function cycle_colors() {
                 sleep(transition)
                 break
         }
-    } while (cycling == true);
+    } while (cyclingOn == true);
 }
 
 function next_mode() {
