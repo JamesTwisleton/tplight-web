@@ -10,6 +10,7 @@ var bpm;
  */
 var state = 'stop';
 
+var patternMode = 0;
 
 var cycling = false;
 /**
@@ -133,6 +134,27 @@ function getColor() {
     req.send(null);
 }
 
+function getColors(pattern) {
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function () {
+        if (req.readyState == 4 && req.status == 200) {
+            var colors = req.responseText;
+            var arr = colors.split(',');
+
+            document.getElementById('colorValue0').jscolor.fromString(arr[0]);
+            document.getElementById('colorValue1').jscolor.fromString(arr[1]);
+            document.getElementById('colorValue2').jscolor.fromString(arr[2]);
+            document.getElementById('colorValue3').jscolor.fromString(arr[3]);
+            document.getElementById('colorValue4').jscolor.fromString(arr[4]);
+            document.getElementById('colorValue5').jscolor.fromString(arr[5]);
+            document.getElementById('colorValue6').jscolor.fromString(arr[6]);
+            document.getElementById('colorValue7').jscolor.fromString(arr[7]);
+        }
+    }
+    req.open("GET", "/colors?pattern="+pattern, true);
+    req.send(null);
+}
+
 /**
  * Starts cycle
  */
@@ -245,10 +267,12 @@ function getToggles() {
 }
 
 function changePattern(pattern) {
-
+    patternMode = pattern;  
+    getColors(pattern);
     var req = new XMLHttpRequest();
     req.open("GET", "/changepattern?pattern=" + pattern, true);
     req.send(null);
+    
 }
 
 /**
@@ -256,13 +280,14 @@ function changePattern(pattern) {
  * every 5 seconds from the server.
  */
 window.onload = function () {
-    changePattern(5);
+    getColors(0);
     getBpm();
     getColor();
     //getToggles();
 
     /*Refresh slider every 5 seconds*/
     setInterval(function () {
+        getColors(pattern);
         getBpm();
         getColor();
         //getToggles();
