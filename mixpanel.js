@@ -32,7 +32,7 @@ var patternMode = 0;
 var patternModeCount = 4;
 var bpm = 60;
 var transition = 60000 / bpm;
-var fade = transition / 5;
+var fade = Math.round(transition / 3);
 var fadeOn = false;
 var globalColor = '000000';
 
@@ -156,7 +156,7 @@ function speed_up() {
     if (bpm < 200) {
         bpm = bpm + 1;
         transition = 60000 / bpm;
-        fade = Math.round(transition / 4);
+        fade = Math.round(transition / 3);
         console.log("speed up");
     }
 }
@@ -165,7 +165,7 @@ function slow_down() {
     if (bpm > 10) {
         bpm = bpm - 1;
         transition = 60000 / bpm;
-        fade = Math.round(transition / 4);
+        fade = Math.round(transition / 3);
         console.log("slow down");
     }
 }
