@@ -252,21 +252,5 @@ function buttonFadePress() {
 }
 
 
-$(function() {
-    $('#toggle-cycling').change(function() {
-        buttonPlayPress();
-        console.log("wow");
-    })
-  })
-
-
-$(function() {
-    $('#toggle-fade').change(function() {
-        buttonFadePress();
-        console.log("wow");
-    })
-  })
-
-
 
   

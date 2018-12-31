@@ -58,7 +58,7 @@
 
 
 
-            <div class="btn-group" data-toggle="buttons">
+            <div class="btn-group btn-group-justified" data-toggle="buttons">
 
                 <label class="btn btn-success active">
                     <input type="radio" name="options" id="option2" autocomplete="off" chacked>
@@ -98,8 +98,7 @@
         <div class="row">
             <div class="container-fluid col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6 col-xl-6">
                 <p class="sub-title">Colors</p>
-                
-                    <table class="table-borderless">
+                    <table class="table-borderless" align="center">
                         <tbody>
                             <tr>
                                 <td colspan="6">
@@ -144,20 +143,16 @@
                 <p class="sub-title">Controls</p>
 
                 <div class="container-fluid col-xs-6 fade-toggle">
-                    <input type="checkbox" class="align-middle fade-toggle" id="toggle-cycling" onclick="buttonPlayPress()"
-                        data-toggle="toggle" data-on="CYCLING" data-off="CYCLING" data-size="mini" data-width="80%"
-                        data-height="45px" data-onstyle="success" data-offstyle="danger">
+                    <input type="checkbox" class="align-middle fade-toggle" id="toggle-cycling" onchange="buttonPlayPress()"
+                        data-toggle="toggle" data-on="CYCLING ON" data-off="CYCLING OFF" data-size="mini" data-width="80%"
+                        data-height="98px" data-onstyle="success" data-offstyle="danger" data-style="switches">
                 </div>
-                <br>
-                <br>
-                <br>
                 <div class="container-fluid col-xs-6 fade-toggle">
-                    <input type="checkbox" class="align-middle fade-toggle" id="toggle-fade" onclick="buttonFadePress()"
-                        data-toggle="toggle" data-on="FADE" data-off="FADE" data-size="mini" data-width="80%"
-                        data-height="45px" data-onstyle="success" data-offstyle="danger">
+                    <input type="checkbox" class="align-middle fade-toggle" id="toggle-fade" onchange="buttonFadePress()"
+                        data-toggle="toggle" data-on="FADE ON" data-off="FADE OFF" data-size="mini" data-width="80%"
+                        data-height="98px" data-onstyle="success" data-offstyle="danger" data-style="switches">
                 </div>
                 <!-- For some reason these switches aren't working - they did before -->
-
             </div>
 
 
@@ -172,8 +167,3 @@
 </body>
 
 </html>
-
-<!-- 
-    colors aren't central again, and switches dont work.
-    Need to make server side storage for colour patterns, maybe save to file.
- -->
