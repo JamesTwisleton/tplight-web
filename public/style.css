@@ -88,18 +88,13 @@
     background-color: #2d2d2d;
 }
 
-.btn-default {
-    color: white;
-    border-color: white;
-    background-color: #2d2d2d;
-}
-
 input.jscolor {
-    font-size: 12px;
-    padding: 0px 5px 0px 5px;
+    font-size: 65%;
+    padding: 15px 15px 15px 15px;
     width:100%;
-    align:center
-
+    align:center;
+    text-align:center;
+    
 }
 
 body {
@@ -151,16 +146,46 @@ input.transition-readout {
     padding: 20px 0px 0px 0px;
 }
 
-input.bpm-readout {
-    max-width: 100%;
+.bpm-container {
+
+    max-width: 190px;
+    max-height: 190px;
     font-size: 118px;
     font-family: lcd;
     color: 5DFF00;
     background-color: black;
     text-align: center;
     border: none;
-    padding: 20px 0px 0px 0px;
+    padding: 30px 0px 0px 0px;
     border-radius: 1rem;
+
+}
+
+
+input.bpm-readout {
+    max-width: 100px;
+    max-height: 100px;
+    font-size: 118px;
+    font-family: lcd;
+    color: 5DFF00;
+    background-color: black;
+    text-align: center;
+    border: none;
+    padding: 0px 0px 0px 0px;
+    border-radius: 1rem;
+}
+
+input.bpm-text {
+    max-width: 50px;
+    max-height: 50px;
+    font-size: 26px;
+    font-family: lcd;
+    color: 5DFF00;
+    background-color: black;
+    text-align: center;
+    border: none;
+    border-radius: 1rem;
+    padding: 10px 0px 20px 0px;
 
 }
 
@@ -194,25 +219,21 @@ p.bpm{
 
 input.fade-toggle {
     max-width: 100%;
+    max-height: 50%;
     font-size: 118px;
-    font-family: lcd;
+
     color: 5DFF00;
     background-color: black;
-    text-align: center;
-    padding: 20px 0px 0px 0px;
+    padding: 30px 0px 0px 0px;
 }
 
-p.colour-title {
-    max-width: 100%;
-    font-size: 26px;
-    font-family: futura-demi-bold;
-    color: white;
-    text-align: center;
-}
+
 
 tr td{
-    padding: 0px 5px 5px 0px;
+    padding: 0px 10px 10px 1px;
+
     margin: 0 !important;
+    
 
   }
 
@@ -231,3 +252,25 @@ p.main-title {
         color: white;
         text-align: center;
     }
+
+p.sub-title {
+    max-width: 100%;
+    font-size: 26px;
+    font-family: futura-demi-bold;
+    color: white;
+    text-align: center;
+    }
+
+.btn span.glyphicon.glyphicon-ok {    			
+        opacity: 0;				
+    }
+.btn.active span.glyphicon.glyphicon-ok {				
+        opacity: 1;				
+    }
+
+.btn-play {
+        color: white;
+
+        background-color: #2d2d2d;
+    }
+

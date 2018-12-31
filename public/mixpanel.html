@@ -11,6 +11,9 @@
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 </head>
 
 <body>
@@ -21,8 +24,18 @@
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6 col-xl-6">
                 <div class="align-top">
+                    <div class="row">
                         <p class="main-title">MixPanel</p>
-                    <input type="text" disabled="disabled" class="bpm-readout" id="bpmReadout">
+                    </div>
+
+                    <div class="container-fluid bpm-container">
+                        <div class="row">
+                            <input type="text" disabled="disabled" class="bpm-readout" id="bpmReadout">
+                        </div>
+                        <div class="row">
+                            <input type="text" value="bpm" disabled="disabled" class="bpm-text">
+                        </div>
+                    </div>
                 </div>
                 <br>
             </div>
@@ -30,71 +43,127 @@
                 <button onclick="speedUp()" class="btn btn-success glyphicon glyphicon-arrow-up btn-block"></button>
                 <br>
                 <button onclick="slowDown()" class="btn btn-danger glyphicon glyphicon-arrow-down btn-block"></button>
-            
-                <div class="align-bottom">
-                        <div class="row">
-                            <div class="container-fluid col-xs-6">
-                                <button type="button" class="btn btn-default btn-block" onclick='buttonPlayPress()'>
-                                    <span id="buttonIcon" class="glyphicon glyphicon-play"></span>
-                                </button>
-                            </div>
-                            <div class="container-fluid col-xs-6">
-                                <input type="checkbox" class="fade-toggle align-middle" id="toggle-event" onclick="buttonFadePress()"
-                                    data-toggle="toggle" data-on="FADE ON" data-off="FADE OFF" data-size="mini" data-width="100%"
-                                    data-onstyle="success" data-offstyle="danger">
-                            </div>
-                        </div>
-                    </div>
+
 
             </div>
 
         </div>
+        <br>
 
         <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6 col-xl-6">
 
-                <table class="table-borderless">
-                    <thead>
-                        <tr>
-                            <p class="colour-title">Html Colours</p>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td colspan="3">
-                                <input class="jscolor" value="" id="colorValue" onchange='changeColor()'>
-                            </td>
-                            <td colspan="3">
-                                <input class="jscolor" value="" id="colorValue" onchange='changeColor()'>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">
-                                <input class="jscolor" value="" id="colorValue" onchange='changeColor()'>
-                            </td>
-                            <td colspan="3">
-                                <input class="jscolor" value="" id="colorValue" onchange='changeColor()'>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">
-                                <input class="jscolor" value="" id="colorValue" onchange='changeColor()'>
-                            </td>
-                            <td colspan="3">
-                                <input class="jscolor" value="" id="colorValue" onchange='changeColor()'>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">
-                                <input class="jscolor" value="" id="colorValue" onchange='changeColor()'>
-                            </td>
-                            <td colspan="3">
-                                <input class="jscolor" value="" id="colorValue" onchange='changeColor()'>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+
+            <p class="sub-title">Pattern</p>
+
+
+
+
+            <div class="btn-group" data-toggle="buttons">
+
+                <label class="btn btn-success active">
+                    <input type="radio" name="options" id="option2" autocomplete="off" chacked>
+                    <span class="glyphicon glyphicon-ok"></span>
+                </label>
+
+                <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option1" autocomplete="off">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </label>
+
+                <label class="btn btn-info">
+                    <input type="radio" name="options" id="option2" autocomplete="off">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </label>
+
+                <label class="btn btn-default">
+                    <input type="radio" name="options" id="option2" autocomplete="off">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </label>
+
+                <label class="btn btn-warning btn-large">
+                    <input type="radio" name="options" id="option2" autocomplete="off">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </label>
+
+                <label class="btn btn-danger">
+                    <input type="radio" name="options" id="option2" autocomplete="off">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </label>
+
             </div>
+
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="container-fluid col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6 col-xl-6">
+                <p class="sub-title">Colors</p>
+                
+                    <table class="table-borderless">
+                        <tbody>
+                            <tr>
+                                <td colspan="6">
+                                    <input class="jscolor" value="" id="colorValue" onchange='changeColor()'>
+                                </td>
+                                <td colspan="6">
+                                    <input class="jscolor" value="" id="colorValue" onchange='changeColor()'>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">
+                                    <input class="jscolor" value="" id="colorValue" onchange='changeColor()'>
+                                </td>
+                                <td colspan="6">
+                                    <input class="jscolor" value="" id="colorValue" onchange='changeColor()'>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">
+                                    <input class="jscolor" value="" id="colorValue" onchange='changeColor()'>
+                                </td>
+                                <td colspan="6">
+                                    <input class="jscolor" value="" id="colorValue" onchange='changeColor()'>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">
+                                    <input class="jscolor" value="" id="colorValue" onchange='changeColor()'>
+                                </td>
+                                <td colspan="6">
+                                    <input class="jscolor" value="" id="colorValue" onchange='changeColor()'>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+            </div>
+
+
+
+            <div class="row">
+                <p class="sub-title">Controls</p>
+
+                <div class="container-fluid col-xs-6 fade-toggle">
+                    <input type="checkbox" class="align-middle fade-toggle" id="toggle-cycling" onclick="buttonPlayPress()"
+                        data-toggle="toggle" data-on="CYCLING" data-off="CYCLING" data-size="mini" data-width="80%"
+                        data-height="45px" data-onstyle="success" data-offstyle="danger">
+                </div>
+                <br>
+                <br>
+                <br>
+                <div class="container-fluid col-xs-6 fade-toggle">
+                    <input type="checkbox" class="align-middle fade-toggle" id="toggle-fade" onclick="buttonFadePress()"
+                        data-toggle="toggle" data-on="FADE" data-off="FADE" data-size="mini" data-width="80%"
+                        data-height="45px" data-onstyle="success" data-offstyle="danger">
+                </div>
+                <!-- For some reason these switches aren't working - they did before -->
+
+            </div>
+
+
+
+
+
 
 
 

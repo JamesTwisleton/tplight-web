@@ -224,16 +224,16 @@ window.onload = function(){
 }
 
 function buttonPlayPress() {
-    var buttonIcon = document.getElementById("buttonIcon");
+    // var buttonIcon = document.getElementById("buttonIcon");
     if(state=='stop'){
       state='play';
-      buttonIcon.className = "glyphicon glyphicon-pause";
+      //buttonIcon.className = "glyphicon glyphicon-pause";
       start();
       console.log("start invoked")
     }
     else if(state=='play'){
       state = 'stop';
-      buttonIcon.className = "glyphicon glyphicon-play";
+      //buttonIcon.className = "glyphicon glyphicon-play";
       stop();
       console.log("stop invoked")
     }
@@ -253,7 +253,20 @@ function buttonFadePress() {
 
 
 $(function() {
-    $('#toggle-event').change(function() {
-        buttonFadePress();
+    $('#toggle-cycling').change(function() {
+        buttonPlayPress();
+        console.log("wow");
     })
   })
+
+
+$(function() {
+    $('#toggle-fade').change(function() {
+        buttonFadePress();
+        console.log("wow");
+    })
+  })
+
+
+
+  
