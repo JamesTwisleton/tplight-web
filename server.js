@@ -332,46 +332,7 @@ function cycle_colors() {
     } while (cyclingOn == true);
 }
 
-// function cycle_colors() {
-//     do {
-//         switch (patternMode) {
-//             // whole rgb
-//             case 0:
-//                 change_color('ff0000', 100, fade)
-//                 sleep(transition)
-//                 change_color('00ff00', 100, fade)
-//                 sleep(transition)
-//                 change_color('0000ff', 100, fade)
-//                 sleep(transition)
-//                 break
-//             // red and blue
-//             case 1:
-//                 change_color('ff0000', 100, fade)
-//                 sleep(transition)
-//                 change_color('0000ff', 100, fade)
-//                 sleep(transition)
-//                 break
-//             // blue and white
-//             case 2:
-//                 change_color('0000ff', 100, fade)
-//                 sleep(transition)
-//                 change_color('ffffff', 100, fade)
-//                 sleep(transition)
-//                 break
-//             // white strobe
-//             case 3:
-//                 change_color('ffffff', 100, fade)
-//                 sleep(transition)
-//                 change_color('000000', 0, fade)
-//                 sleep(transition)
-//                 break
-//         }
-//     } while (cyclingOn == true);
-// }
-
 function next_mode() {
     patternMode = (patternMode + 1) % patternModeCount;
 }
 
-//bug where fade only works when speed up or slow down hasnt been pressed (although, over a certain BPM I think it's irrelevant)
-//if bulb is white, it doesn't work. if bulb is yellow, it does
