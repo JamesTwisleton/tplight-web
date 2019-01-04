@@ -292,7 +292,7 @@ window.onload = function () {
     setInterval(function () {
         getColors(patternMode);
         getBpm();
-        getColor();
+       // getColor();
         //getToggles();
     }, 5000);
 }
