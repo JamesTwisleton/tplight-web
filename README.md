@@ -1,6 +1,6 @@
 # tplight-web
 ## a web interface for controlling tplink lightbulbs.
-![frontend](frontend.png)
+![frontend image 0](frontend0.png)
 
 
 ### Setup
@@ -19,6 +19,9 @@ Install [Node.js](https://nodejs.org/en/) and [npm](https://www.npmjs.com/)
 
 To use from another device on the same network, type the server machines IP address into a browser window.
 
+![frontend image 1](frontend1.png)
+
+
 ### Issues to resolve
 - [x] Pattern choosing
 - [ ] concurrency broken as switches don't update across clients.
@@ -30,3 +33,5 @@ color picking and setting code to interface with server stored patterns.
 - [ ] More fluid frontend speed changes. Previously had it set to change in increments of 5, but decided it lacked granularity. Make it so when you hold down the button, it slowly increases in speed (IE, how fast the BPM changes).
 - [ ] Image based color changes
 - [ ] Real time image based color changes
+
+![frontend image 2](frontend2.png)
