@@ -24,5 +24,6 @@ To use from another device on the same network, type the server machines IP addr
 color picking and setting code to interface with server stored patterns.
 - [ ] Saving user created patterns to file.
 - [ ] Using sockets to more efficiently persist state between server and clients.
+- [ ] More fluid frontend speed changes. Previously had it set to change in increments of 5, but decided it lacked granularity. Make it so when you hold down the button, it slowly increases in speed (IE, how fast the BPM changes).
 - [ ] Image based color changes
 - [ ] Real time image based color changes
