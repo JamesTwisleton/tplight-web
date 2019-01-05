@@ -3,7 +3,9 @@
 
 ### Setup
 #### Configuration
-Set `colorBulbIP` in `config/config.json` to the IP address of the bulb. We recommend setting up a static IP for your bulb on your router.
+Set [`colorBulbIP`](https://github.com/JamesTwisleton/tplight-web/blob/7e3ee072e8bc1ca5ea8d28271715a91f47860194/config/config.json#L3)  in `config/config.json` to the IP address of the bulb. We recommend setting up a static IP for your bulb on your router.
+
+
 
 #### Installation
 Install [Node.js](https://nodejs.org/en/) and [npm](https://www.npmjs.com/)
