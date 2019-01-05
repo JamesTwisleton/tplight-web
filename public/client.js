@@ -283,6 +283,13 @@ window.onload = function () {
     document.getElementById("colorValue0").disabled = true;
 
 
+    var socket = io.connect('http://localhost');
+    socket.on('init', function (data) {
+      console.log(data);
+      socket.emit('my other event', { my: 'data' });
+    });
+  
+
     getColors(0);
     getBpm();
     getColor();

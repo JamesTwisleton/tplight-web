@@ -6,11 +6,13 @@ const TPLSmartDevice = require('tplink-lightbulb');
 const convert = require('color-convert');
 const sleep = require('system-sleep');
 const config = require('./config/config');
+var app = require('express')();
 const express = require('express');
-const app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
 /**
- * Bulb setup
+ * Bulb and pattern setup
  */
 const bulb = [config.colorBulbIP];
 const port_no = config.portNumber;
@@ -22,7 +24,6 @@ var colors2 = config.pattern2;
 var colors3 = config.pattern3;
 var colors4 = config.pattern4;
 var colors5 = config.pattern5;
-
 
 /**
  * Pattern globals
@@ -39,11 +40,41 @@ var globalColor = '000000';
 /**
  * Express server setup.
  */
+server.listen(80);
 app.use(express.static(`${__dirname}/public`));
-app.get('/', function (req, res) {
-    res.set("Connection", "close");
-    res.send(index.html);
-});
+
+io.on('connection', function (socket) {
+    socket.emit('init', { 
+        cycling : cyclingOn, 
+        pattern : patternMode,
+        bpm : bpm, 
+        fade : fadeOn,
+        pattern0 : colors0,
+        pattern1 : colors1,
+        pattern2 : colors2,
+        pattern3 : colors3,
+        pattern4 : colors4,
+        pattern5 : colors5 
+    });
+    socket.emit('pattern', { pattern: patternMode });
+    socket.on('my other event', function (data) {
+      console.log(data);
+    });
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.get('/speedup', function (req, res) {
     speed_up();
     res.set("Connection", "close");
@@ -147,10 +178,6 @@ app.get('/colors', function (req, res) {
 
     }
 });
-
-app.listen(port_no)
-
-
 
 function speed_up() {
     if (bpm < 200) {
