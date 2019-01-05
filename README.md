@@ -1,7 +1,7 @@
 # tplight-web
 ## a web interface for controlling tplink lightbulbs.
 
-![frontend](https://raw.githubusercontent.com/jamestwisleton/tplight-web/master/frontend.png)
+![frontend](frontend.png)
 
 
 ### Setup
@@ -14,7 +14,7 @@ Set [`colorBulbIP`](https://github.com/JamesTwisleton/tplight-web/blob/7e3ee072e
 Install [Node.js](https://nodejs.org/en/) and [npm](https://www.npmjs.com/)
 
 `npm install` to install
-
+gi 
 #### Deployment
 `sudo node server.js` to deploy a server on localhost with ability to control [tplink-lightbulb](https://github.com/konsumer/tplink-lightbulb)s. Go to localhost in a browser window to use. 
 
