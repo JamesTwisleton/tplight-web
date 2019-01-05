@@ -86,7 +86,7 @@ input.jscolor {
     font-size: 65%;
     padding: 15px 15px 15px 15px;
     width:100%;
-    align:center;
+    box-align:center;
     text-align:center;
     
 }
