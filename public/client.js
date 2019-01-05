@@ -22,18 +22,7 @@ var fade = false;
  * Asks the server to speed up the current cycle, sets relevant HTML elements
  * to match new transition speed.
  */
-function speedUp() {
-    var req = new XMLHttpRequest();
-    req.onreadystatechange = function () {
-        if (req.readyState == 4 && req.status == 200) {
-            bpm = document.getElementById("bpmReadout");
-            bpm.value = req.responseText;
-            getBpm();
-        }
-    }
-    req.open("GET", "/speedup", true);
-    req.send(null);
-}
+
 
 /**
  * Asks the server to slow down the current cycle, sets relevant HTML elements
@@ -275,49 +264,48 @@ function changePattern(pattern) {
     
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
- * Sets transition from server on page load, sets a timer to refresh the transition
- * every 5 seconds from the server.
+ * Sets parameters from server on page load.
  */
+var socket;
 window.onload = function () {
-    document.getElementById("colorValue0").disabled = true;
-
-
-    var socket = io.connect('http://localhost');
+    socket = io.connect('http://localhost');
     socket.on('init', function (data) {
-      console.log(data);
-      socket.emit('my other event', { my: 'data' });
+      initElements(data);
     });
-  
+}
 
-    getColors(0);
-    getBpm();
-    getColor();
-    //getToggles();
+function initElements(serverValues){
+    console.log(serverValues.pattern0);
+}
 
-    /*Refresh slider every 5 seconds*/
-    setInterval(function () {
-        getColors(patternMode);
-        getBpm();
-       // getColor();
-        //getToggles();
-    }, 5000);
+function speedUp() {
+    socket.emit('speedup');
 }
 
 function buttonPlayPress() {
-    // var buttonIcon = document.getElementById("buttonIcon");
-    if (state == 'stop') {
-        state = 'play';
-        //buttonIcon.className = "glyphicon glyphicon-pause";
-        start();
-        console.log("start invoked")
-    }
-    else if (state == 'play') {
-        state = 'stop';
-        //buttonIcon.className = "glyphicon glyphicon-play";
-        stop();
-        console.log("stop invoked")
-    }
+    socket.emit('cyclingtoggled');
 }
 
 function buttonFadePress() {

@@ -1,6 +1,6 @@
 # tplight-web
 ## a web interface for controlling tplink lightbulbs.
-![frontend image 0](frontend0.png)
+![frontend image 0](images/frontend0.png)
 
 
 ### Setup
@@ -19,7 +19,7 @@ Install [Node.js](https://nodejs.org/en/) and [npm](https://www.npmjs.com/)
 
 To use from another device on the same network, type the server machines IP address into a browser window.
 
-![frontend image 1](frontend1.png)
+![frontend image 1](images/frontend1.png)
 
 
 ### Issues to resolve
@@ -34,4 +34,4 @@ color picking and setting code to interface with server stored patterns.
 - [ ] Image based color changes
 - [ ] Real time image based color changes
 
-![frontend image 2](frontend2.png)
+![frontend image 2](images/frontend2.png)

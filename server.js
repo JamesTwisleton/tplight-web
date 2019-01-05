@@ -42,7 +42,6 @@ var globalColor = '000000';
  */
 server.listen(80);
 app.use(express.static(`${__dirname}/public`));
-
 io.on('connection', function (socket) {
     socket.emit('init', { 
         cycling : cyclingOn, 
@@ -56,10 +55,27 @@ io.on('connection', function (socket) {
         pattern4 : colors4,
         pattern5 : colors5 
     });
-    socket.emit('pattern', { pattern: patternMode });
-    socket.on('my other event', function (data) {
-      console.log(data);
+    socket.on('speedup', function (data) {
+      console.log("speedup");
     });
+    socket.on('cyclingon', function (data) {
+        console.log("cyclingon");
+      });
+      socket.on('cyclingoff', function (data) {
+        console.log("cyclingoff");
+      });
+      socket.on('fadeon', function (data) {
+        console.log("fadeon");
+      });
+
+      socket.on('fadeoff', function (data) {
+        console.log("fadeoff");
+      });
+
+      socket.on('changepattern', function (data) {
+        console.log(data);
+      });
+
   });
 
 
