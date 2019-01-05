@@ -8,6 +8,7 @@ Set `colorBulbIP` in `config/config.json` to the IP address of the bulb. We reco
 
 #### Installation
 Install [Node](https://nodejs.org/en/) and [npm](https://www.npmjs.com/)
+
 `npm install` to install
 
 #### Deployment
