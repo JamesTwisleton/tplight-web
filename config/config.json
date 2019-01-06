@@ -1,78 +1,68 @@
-{ 
-    "portNumber": "80", 
-    "colorBulbIP": "192.168.1.6", 
+{
+    "portNumber": "80",
+    "colorBulbIP": "192.168.1.6",
     "whiteBulbIP": "192.168.1.7",
     "colorBulb2IP": "192.168.1.9",
-
-    "pattern0": 
-    {
-        "color0": "ff0000",
-        "color1": "00ff00",
-        "color2": "0000ff",
-        "color3": "ff0000",
-        "color4": "00ff00",
-        "color5": "0000ff",
-        "color6": "FF00FF",
-        "color7": "FFFF00"
-    
-    },
-    "pattern1": 
-    {
-        "color0": "0000ff",
-        "color1": "ffffff",
-        "color2": "ff0000",
-        "color3": "0000ff",
-        "color4": "ffffff",
-        "color5": "ff0000",
-        "color6": "0000ff",
-        "color7": "ffffff"
-    
-    },
-    "pattern2": 
-    {
-        "color0": "ff16d4",
-        "color1": "d4ff16",
-        "color2": "16ff6b",
-        "color3": "ff2d16",
-        "color4": "ff16d4",
-        "color5": "d4ff16",
-        "color6": "16ff6b",
-        "color7": "ff2d16"
-    
-    },
-    "pattern3": 
-    {
-        "color0": "17ffd1",
-        "color1": "ff4517",
-        "color2": "ffb917",
-        "color3": "7417ff",
-        "color4": "17ffd1",
-        "color5": "ff4517",
-        "color6": "ffb917",
-        "color7": "7417ff"
-    
-    },
-    "pattern4": 
-    {
-        "color0": "ff1919",
-        "color1": "19ff19",
-        "color2": "1919ff",
-        "color3": "ff8c19",
-        "color4": "ff1919",
-        "color5": "19ff19",
-        "color6": "1919ff",
-        "color7": "ff8c19"
-    },
-    "pattern5": 
-    {
-        "color0": "1938ff",
-        "color1": "ff8419",
-        "color2": "fff719",
-        "color3": "f019ff",
-        "color4": "1938ff",
-        "color5": "ff8419",
-        "color6": "fff719",
-        "color7": "f019ff"
-    }
+    "patterns": [
+        [
+            "ff0000",
+            "00ff00",
+            "0000ff",
+            "ff0000",
+            "00ff00",
+            "0000ff",
+            "FF00FF",
+            "FFFF00"
+        ],
+        [
+            "0000ff",
+            "ffffff",
+            "ff0000",
+            "0000ff",
+            "ffffff",
+            "ff0000",
+            "0000ff",
+            "ffffff"
+        ],
+        [
+            "ff16d4",
+            "d4ff16",
+            "16ff6b",
+            "ff2d16",
+            "ff16d4",
+            "d4ff16",
+            "16ff6b",
+            "ff2d16"
+        ],
+        [
+            "17ffd1",
+            "ff4517",
+            "ffb917",
+            "7417ff",
+            "17ffd1",
+            "ff4517",
+            "ffb917",
+            "7417ff"
+        ],
+        [
+            "ff1919",
+            "19ff19",
+            "1919ff",
+            "ff8c19",
+            "ff1919",
+            "19ff19",
+            "1919ff",
+            "ff8c19"
+        ],
+        [
+            "1938ff",
+            "ff8419",
+            "fff719",
+            "f019ff",
+            "1938ff",
+            "ff8419",
+            "fff719",
+            "f019ff"
+        ]
+    ]
 }
-

@@ -12,30 +12,18 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
 /**
- * Bulb and pattern setup
- */
+ * Globals
+*/
 const bulb = [config.colorBulbIP];
 const port_no = config.portNumber;
 const light = new TPLSmartDevice(bulb[0]);
-
-var colors0 = config.pattern0;
-var colors1 = config.pattern1;
-var colors2 = config.pattern2;
-var colors3 = config.pattern3;
-var colors4 = config.pattern4;
-var colors5 = config.pattern5;
-
-/**
- * Pattern globals
-*/
+var patterns = config.patterns;
 var cyclingOn = false;
-var patternMode = 0;
-var patternModeCount = 4;
+var fadeOn = false;
+var currentPattern = 0;
 var bpm = 60;
 var transition = 60000 / bpm;
 var fade = Math.round(transition / 3);
-var fadeOn = false;
-var globalColor = '000000';
 
 /**
  * Express server setup.
@@ -43,40 +31,27 @@ var globalColor = '000000';
 server.listen(80);
 app.use(express.static(`${__dirname}/public`));
 io.on('connection', function (socket) {
-    socket.emit('init', { 
-        cycling : cyclingOn, 
-        pattern : patternMode,
-        bpm : bpm, 
-        fade : fadeOn,
-        pattern0 : colors0,
-        pattern1 : colors1,
-        pattern2 : colors2,
-        pattern3 : colors3,
-        pattern4 : colors4,
-        pattern5 : colors5 
+    socket.emit('init', {
+        cycling: cyclingOn,
+        fade: fadeOn,
+        currentPattern: currentPattern,
+        bpm: bpm,
+        patterns: patterns
     });
     socket.on('speedup', function (data) {
-      console.log("speedup");
+        console.log("speedup");
     });
-    socket.on('cyclingon', function (data) {
-        console.log("cyclingon");
-      });
-      socket.on('cyclingoff', function (data) {
-        console.log("cyclingoff");
-      });
-      socket.on('fadeon', function (data) {
-        console.log("fadeon");
-      });
-
-      socket.on('fadeoff', function (data) {
-        console.log("fadeoff");
-      });
-
-      socket.on('changepattern', function (data) {
+    socket.on('cyclingtoggled', function (data) {
+        console.log("cyclingtoggled");
+    });
+    socket.on('fadetoggled', function (data) {
+        console.log("fadetoggled");
+    });
+    socket.on('changepattern', function (data) {
         console.log(data);
-      });
+    });
 
-  });
+});
 
 
 
@@ -116,7 +91,7 @@ app.get('/color', function (req, res) {
     res.send(globalColor);
 });
 app.get('/changetransition', function (req, res) {
-  
+
     transition = parseInt(req.query.transition)
 });
 app.get('/changecolor', function (req, res) {
@@ -239,7 +214,7 @@ function change_color(color, brightness = 100, transition = 0) {
 
     if (fadeOn == false) {
         transition = 0;
-    }else{
+    } else {
         transition = fade;
     }
     light.power(true, transition, opt)

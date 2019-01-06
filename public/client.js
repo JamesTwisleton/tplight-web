@@ -128,7 +128,7 @@ function getColors(pattern) {
     req.onreadystatechange = function () {
         if (req.readyState == 4 && req.status == 200) {
             var colors = JSON.parse(req.responseText);
-            
+
             console.log(colors.color0);
             document.getElementById('colorValue0').jscolor.fromString(colors.color0);
             document.getElementById('colorValue1').jscolor.fromString(colors.color1);
@@ -140,7 +140,7 @@ function getColors(pattern) {
             document.getElementById('colorValue7').jscolor.fromString(colors.color7);
         }
     }
-    req.open("GET", "/colors?pattern="+pattern, true);
+    req.open("GET", "/colors?pattern=" + pattern, true);
     req.send(null);
 }
 
@@ -229,10 +229,10 @@ function getToggles() {
     var req = new XMLHttpRequest();
     req.onreadystatechange = function () {
         if (req.readyState == 4 && req.status == 200) {
-            console.log("cycling:"+req.responseText);
-            if(req.responseText==true){
+            console.log("cycling:" + req.responseText);
+            if (req.responseText == true) {
                 $('#toggle-cycling').prop('checked', false).change();
-            }else{
+            } else {
                 $('#toggle-cycling').prop('checked', true).change();
             }
         }
@@ -244,9 +244,9 @@ function getToggles() {
     req.onreadystatechange = function () {
         if (req.readyState == 4 && req.status == 200) {
             console.log("fading:" + req.responseText);
-            if(req.responseText==true){
+            if (req.responseText == true) {
                 $('#toggle-fade').prop('checked', false).change();
-            }else{
+            } else {
                 $('#toggle-fade').prop('checked', true).change();
             }
         }
@@ -256,12 +256,12 @@ function getToggles() {
 }
 
 function changePattern(pattern) {
-    patternMode = pattern;  
+    patternMode = pattern;
     getColors(patternMode);
     var req = new XMLHttpRequest();
     req.open("GET", "/changepattern?pattern=" + pattern, true);
     req.send(null);
-    
+
 }
 
 
@@ -283,29 +283,96 @@ function changePattern(pattern) {
 
 
 
-
+var bpm = 0;
+var currentPattern = 0;
+var cycling = false;
+var fade = false;
+var patterns = [];
+var socket;
 
 /**
- * Sets parameters from server on page load.
+ * Sets parameters from server on page load and initializes socket listeners.
  */
-var socket;
 window.onload = function () {
+    bpmReadout = document.getElementById("bpmReadout");
+    bpmReadout.value = "?";
     socket = io.connect('http://localhost');
     socket.on('init', function (data) {
-      initElements(data);
+        initElements(data);
+    });
+    socket.on('bpmUpdate', function (data) {
+        setBpm(data);
+    });
+    socket.on('cyclingUpdate', function (data) {
+        setCycling(data);
+    });
+    socket.on('fadeUpdate', function (data) {
+        setFade(data);
+    });
+    socket.on('patternUpdate', function (data) {
+        setPattern(data);
     });
 }
 
-function initElements(serverValues){
-    console.log(serverValues.pattern0);
+function initElements(serverValues) {
+    bpm = serverValues.bpm;
+    cycling = serverValues.cycling;
+    fade = serverValues.fade;
+    patterns = serverValues.patterns;
+    currentPattern = serverValues.currentPattern;
+
+    setBpmView(bpm);
+    setColorsView(currentPattern);
+    setCyclingToggle(cycling);
+    setFadeToggle(fade);
+}
+
+function setBpmView(bpm) {
+    bpmReadout = document.getElementById("bpmReadout");
+    bpmReadout.value = bpm;
+}
+
+function setColorsView(pattern) {
+    document.getElementById('colorValue0').jscolor.fromString(patterns[pattern][0]);
+    document.getElementById('colorValue1').jscolor.fromString(patterns[pattern][1]);
+    document.getElementById('colorValue2').jscolor.fromString(patterns[pattern][2]);
+    document.getElementById('colorValue3').jscolor.fromString(patterns[pattern][3]);
+    document.getElementById('colorValue4').jscolor.fromString(patterns[pattern][4]);
+    document.getElementById('colorValue5').jscolor.fromString(patterns[pattern][5]);
+    document.getElementById('colorValue6').jscolor.fromString(patterns[pattern][6]);
+    document.getElementById('colorValue7').jscolor.fromString(patterns[pattern][7]);
+}
+
+function setCyclingToggle(state){
+    if(state==false){
+        $('#toggle-cycling').bootstrapToggle('off');
+    }else{
+        $('#toggle-cycling').bootstrapToggle('on');
+    }
+}
+
+function setFadeToggle(state){
+    if(state==false){
+        $('#toggle-fade').bootstrapToggle('off');
+    }else{
+        $('#toggle-fade').bootstrapToggle('on');
+    }
 }
 
 function speedUp() {
     socket.emit('speedup');
 }
 
-function buttonPlayPress() {
+function slowDown() {
+    socket.emit('speedup');
+}
+
+function toggleCycling() {
     socket.emit('cyclingtoggled');
+}
+
+function toggleFade(){
+    socket.emit('fadetoggled');
 }
 
 function buttonFadePress() {
@@ -319,14 +386,14 @@ function buttonFadePress() {
     }
 }
 
-$(function () {
-    $('#toggle-cycling').change(function () {
-            buttonPlayPress();
-    })
-})
+// $(function () {
+//     $('#toggle-cycling').change(function () {
+//         buttonPlayPress();
+//     })
+// })
 
-$(function () {
-    $('#toggle-fade').change(function () {
-            buttonFadePress();
-    })
-})
+// $(function () {
+//     $('#toggle-fade').change(function () {
+//         buttonFadePress();
+//     })
+// })
