@@ -31,7 +31,8 @@ function speedUp() {
             getBpm();
         }
     }
-    req.open("GET", "/speedup", true);
+    let increment = window.event.shiftKey ? "10" : "1";
+    req.open("GET", "/speedup?increment=" + increment, true);
     req.send(null);
 }
 
@@ -48,7 +49,8 @@ function slowDown() {
             getBpm();
         }
     }
-    req.open("GET", "/slowdown", true);
+    let decrement = window.event.shiftKey ? "10" : "1";
+    req.open("GET", "/slowdown?decrement=" + decrement, true);
     req.send(null);
 }
 

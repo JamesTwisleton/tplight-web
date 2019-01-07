@@ -45,13 +45,15 @@ app.get('/', function (req, res) {
     res.send(index.html);
 });
 app.get('/speedup', function (req, res) {
-    speed_up();
+    let increment = parseInt(req.query.increment);
+    speed_up(increment);
     res.set("Connection", "close");
     res.send(bpm.toString());
 
 });
 app.get('/slowdown', function (req, res) {
-    slow_down();
+    let decrement = parseInt(req.query.decrement);
+    slow_down(decrement);
     res.set("Connection", "close");
     res.send(bpm.toString());
 
@@ -152,18 +154,18 @@ app.listen(port_no)
 
 
 
-function speed_up() {
-    if (bpm < 200) {
-        bpm = bpm + 1;
+function speed_up(increment) {
+    if (bpm <= 200 - increment) {
+        bpm = bpm + increment;
         transition = 60000 / bpm;
         fade = Math.round(transition / 3);
         console.log("speed up");
     }
 }
 
-function slow_down() {
-    if (bpm > 10) {
-        bpm = bpm - 1;
+function slow_down(decrement) {
+    if (bpm >= 10 + decrement) {
+        bpm = bpm - decrement;
         transition = 60000 / bpm;
         fade = Math.round(transition / 3);
         console.log("slow down");
