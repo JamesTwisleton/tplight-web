@@ -230,8 +230,8 @@ function change_color(color, brightness = 100, transition = 0) {
 
 function cycle_colors() {
     do {
-        console.log("pattern mode: " + patternMode);
-        switch (patternMode) {
+        console.log("pattern mode: " + currentPattern);
+        switch (currentPattern) {
             case 0:
                 change_color(colors0.color0, 100, fade)
                 console.log(fade);
