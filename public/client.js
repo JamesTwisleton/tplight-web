@@ -1,288 +1,6 @@
 /**
- * The amount of time the lights take to change from one color to another in milliseconds.
+ * Globals
  */
-var transition;
-
-var bpm;
-
-/**
- * For the play/pause button.
- */
-var state = 'stop';
-
-var patternMode = 0;
-
-var cycling = false;
-/**
- * Sets fade to on or off
- */
-var fade = false;
-
-/**
- * Asks the server to speed up the current cycle, sets relevant HTML elements
- * to match new transition speed.
- */
-
-
-/**
- * Asks the server to slow down the current cycle, sets relevant HTML elements
- * to match new transition speed.
- */
-function slowDown() {
-    var req = new XMLHttpRequest();
-    req.onreadystatechange = function () {
-        if (req.readyState == 4 && req.status == 200) {
-            bpm = document.getElementById("bpmReadout");
-            bpm.value = req.responseText;
-            getBpm();
-        }
-    }
-    req.open("GET", "/slowdown", true);
-    req.send(null);
-}
-
-/**
- * Asks the server to change the speed of the current cycle to match the slider, 
- * sets relevant HTML elements to match new transition speed.
- */
-function changeTransition() {
-    var lastClick = 0;
-    var delay = 50;
-    if (lastClick >= (Date.now() - delay)) {
-        return
-    }
-    lastClick = Date.now();
-
-    transitionSlider = document.getElementById("transitionSlider");
-    var req = new XMLHttpRequest();
-    sliderToTransition = 5000 - transitionSlider.value;
-    req.open("GET", "/changetransition?transition=" + sliderToTransition, true);
-    req.send(null);
-    getBpm();
-}
-
-function changeColor() {
-    var lastClick = 0;
-    var delay = 50;
-    if (lastClick >= (Date.now() - delay)) {
-        return
-    }
-    lastClick = Date.now();
-
-    colorvalue = document.getElementById("colorvalue");
-    var req = new XMLHttpRequest();
-    req.open("GET", "/changecolor?color=" + colorValue.value, true);
-    req.send(null);
-    getColor();
-}
-
-/**
- * Sets the bpm readout to match the server value, returns transition value.
- */
-function getBpm() {
-    var req = new XMLHttpRequest();
-    req.onreadystatechange = function () {
-        if (req.readyState == 4 && req.status == 200) {
-            bpm = req.responseText;
-            bpmReadout = document.getElementById("bpmReadout");
-            bpmReadout.value = bpm;
-        }
-    }
-    req.open("GET", "/bpm", true);
-    req.send(null);
-    //return bpm;
-}
-
-/**
- * Sets the transition slider and readout to match the server value, returns transition value.
- */
-function getTransition() {
-    var req = new XMLHttpRequest();
-    req.onreadystatechange = function () {
-        if (req.readyState == 4 && req.status == 200) {
-            transition = req.responseText;
-            transitionSlider = document.getElementById("transitionSlider");
-            transitionSlider.value = 5000 - transition;
-            transitionReadout = document.getElementById("transitionReadout");
-            //transitionReadout.value = transition;
-        }
-    }
-    req.open("GET", "/transition", true);
-    req.send(null);
-    return transition;
-}
-
-function getColor() {
-    // var req = new XMLHttpRequest();
-    // req.onreadystatechange = function () {
-    //     if (req.readyState == 4 && req.status == 200) {
-    //         document.getElementById('colorValue').jscolor.fromString(req.responseText);
-    //     }
-    // }
-    // req.open("GET", "/color", true);
-    // req.send(null);
-}
-
-function getColors(pattern) {
-    var req = new XMLHttpRequest();
-    req.onreadystatechange = function () {
-        if (req.readyState == 4 && req.status == 200) {
-            var colors = JSON.parse(req.responseText);
-
-            console.log(colors.color0);
-            document.getElementById('colorValue0').jscolor.fromString(colors.color0);
-            document.getElementById('colorValue1').jscolor.fromString(colors.color1);
-            document.getElementById('colorValue2').jscolor.fromString(colors.color2);
-            document.getElementById('colorValue3').jscolor.fromString(colors.color3);
-            document.getElementById('colorValue4').jscolor.fromString(colors.color4);
-            document.getElementById('colorValue5').jscolor.fromString(colors.color5);
-            document.getElementById('colorValue6').jscolor.fromString(colors.color6);
-            document.getElementById('colorValue7').jscolor.fromString(colors.color7);
-        }
-    }
-    req.open("GET", "/colors?pattern=" + pattern, true);
-    req.send(null);
-}
-
-/**
- * Starts cycle
- */
-function start() {
-    var req = new XMLHttpRequest();
-    req.onreadystatechange = function () {
-        if (req.readyState == 4 && req.status == 200) {
-            getBpm();
-            getColor();
-        }
-    }
-    req.open("GET", "/start", true);
-    req.send(null);
-}
-
-/**
- * Stops cycle
- */
-function stop() {
-    var req = new XMLHttpRequest();
-    req.onreadystatechange = function () {
-        if (req.readyState == 4 && req.status == 200) {
-            getBpm();
-            getColor();
-        }
-    }
-    req.open("GET", "/stop", true);
-    req.send(null);
-}
-
-/**
- * Changes to next mode
- */
-function nextMode() {
-    var req = new XMLHttpRequest();
-    req.onreadystatechange = function () {
-        if (req.readyState == 4 && req.status == 200) {
-            transitionReadout = document.getElementById("transitionReadout");
-            transitionReadout.value = req.responseText;
-            getBpm();
-        }
-    }
-    req.open("GET", "/mode", true);
-    req.send(null);
-}
-
-
-
-/**
- * Turns on fade
- */
-function fadeOn() {
-    var req = new XMLHttpRequest();
-    req.onreadystatechange = function () {
-        if (req.readyState == 4 && req.status == 200) {
-            getBpm();
-        }
-    }
-    req.open("GET", "/fadeon", true);
-    req.send(null);
-}
-
-
-/**
- * Turns off fade
- */
-function fadeOff() {
-    var req = new XMLHttpRequest();
-    req.onreadystatechange = function () {
-        if (req.readyState == 4 && req.status == 200) {
-            getBpm();
-        }
-    }
-    req.open("GET", "/fadeoff", true);
-    req.send(null);
-}
-
-
-
-function getToggles() {
-
-
-    var req = new XMLHttpRequest();
-    req.onreadystatechange = function () {
-        if (req.readyState == 4 && req.status == 200) {
-            console.log("cycling:" + req.responseText);
-            if (req.responseText == true) {
-                $('#toggle-cycling').prop('checked', false).change();
-            } else {
-                $('#toggle-cycling').prop('checked', true).change();
-            }
-        }
-    }
-    req.open("GET", "/cycling", true);
-    req.send(null);
-
-    var req = new XMLHttpRequest();
-    req.onreadystatechange = function () {
-        if (req.readyState == 4 && req.status == 200) {
-            console.log("fading:" + req.responseText);
-            if (req.responseText == true) {
-                $('#toggle-fade').prop('checked', false).change();
-            } else {
-                $('#toggle-fade').prop('checked', true).change();
-            }
-        }
-    }
-    req.open("GET", "/fading", true);
-    req.send(null);
-}
-
-function changePattern(pattern) {
-    patternMode = pattern;
-    getColors(patternMode);
-    var req = new XMLHttpRequest();
-    req.open("GET", "/changepattern?pattern=" + pattern, true);
-    req.send(null);
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var bpm = 0;
 var currentPattern = 0;
 var cycling = false;
@@ -296,7 +14,7 @@ var socket;
 window.onload = function () {
     bpmReadout = document.getElementById("bpmReadout");
     bpmReadout.value = "?";
-    socket = io.connect('http://localhost');
+    socket = io.connect('http://192.168.1.2');
     socket.on('init', function (data) {
         initElements(data);
     });
@@ -320,7 +38,6 @@ function initElements(serverValues) {
     fade = serverValues.fade;
     patterns = serverValues.patterns;
     currentPattern = serverValues.currentPattern;
-
     setBpmView(bpm);
     setColorsView(currentPattern);
     setCyclingToggle(cycling);
@@ -333,30 +50,30 @@ function setBpmView(bpm) {
 }
 
 function setColorsView(pattern) {
-    document.getElementById('colorValue0').jscolor.fromString(patterns[pattern][0]);
-    document.getElementById('colorValue1').jscolor.fromString(patterns[pattern][1]);
-    document.getElementById('colorValue2').jscolor.fromString(patterns[pattern][2]);
-    document.getElementById('colorValue3').jscolor.fromString(patterns[pattern][3]);
-    document.getElementById('colorValue4').jscolor.fromString(patterns[pattern][4]);
-    document.getElementById('colorValue5').jscolor.fromString(patterns[pattern][5]);
-    document.getElementById('colorValue6').jscolor.fromString(patterns[pattern][6]);
-    document.getElementById('colorValue7').jscolor.fromString(patterns[pattern][7]);
+    for (i = 0; i < 8; i++) {
+        document.getElementById('colorValue'+i).jscolor.fromString(patterns[pattern][i]);
+    }
 }
 
-function setCyclingToggle(state){
-    if(state==false){
+function setCyclingToggle(state) {
+    if (state == false) {
         $('#toggle-cycling').bootstrapToggle('off');
-    }else{
+    } else {
         $('#toggle-cycling').bootstrapToggle('on');
     }
 }
 
-function setFadeToggle(state){
-    if(state==false){
+function setFadeToggle(state) {
+    if (state == false) {
         $('#toggle-fade').bootstrapToggle('off');
-    }else{
+    } else {
         $('#toggle-fade').bootstrapToggle('on');
     }
+}
+
+function setBpm(bpmUpdate){
+    bpm = bpmUpdate;
+    setBpmView(bpm);
 }
 
 function speedUp() {
@@ -364,36 +81,27 @@ function speedUp() {
 }
 
 function slowDown() {
-    socket.emit('speedup');
+    socket.emit('slowdown');
 }
 
-function toggleCycling() {
-    socket.emit('cyclingtoggled');
+function cyclingOn() {
+    socket.emit('cyclingon');
 }
 
-function toggleFade(){
-    socket.emit('fadetoggled');
+function cyclingOff() {
+    socket.emit('cyclingoff');
 }
 
-function buttonFadePress() {
-    var fadeButton = document.getElementById("fadeButton");
-    if (fade == false) {
-        fadeOn();
-    }
-    else if (fade == true) {
-
-        fadeOff();
-    }
+function fadeOn() {
+    socket.emit('fadeon');
 }
 
-// $(function () {
-//     $('#toggle-cycling').change(function () {
-//         buttonPlayPress();
-//     })
-// })
+function fadeOff() {
+    socket.emit('fadeoff');
+}
 
-// $(function () {
-//     $('#toggle-fade').change(function () {
-//         buttonFadePress();
-//     })
-// })
+function changePattern(pattern) {
+    socket.emit('changepattern', {
+        pattern: pattern
+    });
+}

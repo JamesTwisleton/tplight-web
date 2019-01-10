@@ -71,7 +71,9 @@ function speed_up() {
         transition = 60000 / bpm;
         fade = Math.round(transition / fadeRatio);
         console.log("Speeding up to " + bpm + " bpm.");
+        io.sockets.emit('bpmUpdate', bpm);
     }
+
 }
 
 function slow_down() {
@@ -79,8 +81,11 @@ function slow_down() {
         bpm = bpm - 5;
         transition = 60000 / bpm;
         fade = Math.round(transition / fadeRatio);
-        console.log("Slowing down to " + bpm + " bpm.");
+        console.log("Slowing down to " + bpm + " bpm.");    
+        io.sockets.emit('bpmUpdate', bpm);
+
     }
+    
 }
 
 function fade_on() {
