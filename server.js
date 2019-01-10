@@ -62,6 +62,7 @@ io.on('connection', function (socket) {
     });
     socket.on('changepattern', function (data) {
         console.log(data);
+        currentPattern = data;
     });
 });
 
@@ -73,7 +74,6 @@ function speed_up() {
         console.log("Speeding up to " + bpm + " bpm.");
         io.sockets.emit('bpmUpdate', bpm);
     }
-
 }
 
 function slow_down() {
@@ -85,7 +85,6 @@ function slow_down() {
         io.sockets.emit('bpmUpdate', bpm);
 
     }
-    
 }
 
 function fade_on() {

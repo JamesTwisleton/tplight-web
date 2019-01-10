@@ -51,7 +51,7 @@ function setBpmView(bpm) {
 
 function setColorsView(pattern) {
     for (i = 0; i < 8; i++) {
-        document.getElementById('colorValue'+i).jscolor.fromString(patterns[pattern][i]);
+        document.getElementById('colorValue' + i).jscolor.fromString(patterns[pattern][i]);
     }
 }
 
@@ -71,9 +71,13 @@ function setFadeToggle(state) {
     }
 }
 
-function setBpm(bpmUpdate){
+function setBpm(bpmUpdate) {
     bpm = bpmUpdate;
     setBpmView(bpm);
+}
+
+function setPattern(patternUpdate) {
+    currentPattern = patternUpdate;
 }
 
 function speedUp() {
@@ -101,7 +105,6 @@ function fadeOff() {
 }
 
 function changePattern(pattern) {
-    socket.emit('changepattern', {
-        pattern: pattern
-    });
+    socket.emit('changePattern', pattern);
+    setColorsView(pattern);
 }
