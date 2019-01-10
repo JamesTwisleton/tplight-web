@@ -61,8 +61,9 @@ io.on('connection', function (socket) {
         fade_off();
     });
     socket.on('changepattern', function (data) {
-        console.log(data);
         currentPattern = data;
+        io.sockets.emit('patternupdate', currentPattern);
+
     });
 });
 
@@ -72,7 +73,7 @@ function speed_up() {
         transition = 60000 / bpm;
         fade = Math.round(transition / fadeRatio);
         console.log("Speeding up to " + bpm + " bpm.");
-        io.sockets.emit('bpmUpdate', bpm);
+        io.sockets.emit('bpmupdate', bpm);
     }
 }
 
@@ -82,7 +83,7 @@ function slow_down() {
         transition = 60000 / bpm;
         fade = Math.round(transition / fadeRatio);
         console.log("Slowing down to " + bpm + " bpm.");    
-        io.sockets.emit('bpmUpdate', bpm);
+        io.sockets.emit('bpmupdate', bpm);
 
     }
 }

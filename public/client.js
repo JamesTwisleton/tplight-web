@@ -21,14 +21,16 @@ window.onload = function () {
     socket.on('bpmUpdate', function (data) {
         setBpm(data);
     });
-    socket.on('cyclingUpdate', function (data) {
+    socket.on('cyclingupdate', function (data) {
         setCycling(data);
     });
     socket.on('fadeUpdate', function (data) {
         setFade(data);
     });
-    socket.on('patternUpdate', function (data) {
+    socket.on('patternupdate', function (data) {
+        console.log(data);
         setPattern(data);
+        setColorsView(data);
     });
 }
 
@@ -105,6 +107,6 @@ function fadeOff() {
 }
 
 function changePattern(pattern) {
-    socket.emit('changePattern', pattern);
+    socket.emit('changepattern', pattern);
     setColorsView(pattern);
 }
