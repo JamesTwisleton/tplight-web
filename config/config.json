@@ -3,6 +3,9 @@
     "colorBulbIP": "192.168.1.7",
     "whiteBulbIP": "192.168.1.7",
     "colorBulb2IP": "192.168.1.9",
+    "fadeRatio": 3,
+    "bpmMin": 1,
+    "bpmMax": 200,
     "patterns": [
         [
             "ff0000",
