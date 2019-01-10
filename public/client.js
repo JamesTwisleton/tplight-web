@@ -28,9 +28,9 @@ window.onload = function () {
         setFade(data);
     });
     socket.on('patternupdate', function (data) {
-        console.log(data);
         setPattern(data);
         setColorsView(data);
+        setActivePatternButton();
     });
 }
 
@@ -56,6 +56,21 @@ function setColorsView(pattern) {
         document.getElementById('colorValue' + i).jscolor.fromString(patterns[pattern][i]);
     }
 }
+
+function setActivePatternButton() {
+    var btnContainer = document.getElementById("patternButtons");
+
+    var btns = btnContainer.getElementsByClassName("btn");
+
+    // Loop through the buttons and add the active class to the current/clicked button
+    for (var i = 0; i < btns.length; i++) {
+        var oldActive = document.getElementsByClassName("active");
+        oldActive.className = oldActive.className.replace(" active", "");
+        buttonToChange = document.getElementsById("pattern" + currentPattern);
+        buttonToChange.className += " active";
+    };
+}
+
 
 function setCyclingToggle(state) {
     if (state == false) {
@@ -110,3 +125,5 @@ function changePattern(pattern) {
     socket.emit('changepattern', pattern);
     setColorsView(pattern);
 }
+
+

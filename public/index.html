@@ -2,7 +2,6 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
@@ -13,7 +12,6 @@
     <script src="jscolor.js" charset="utf-8"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-
 </head>
 
 <body>
@@ -27,7 +25,6 @@
                     <div class="row">
                         <p class="main-title">MixPanel</p>
                     </div>
-
                     <div class="container-fluid bpm-container">
                         <div class="row">
                             <input type="text" disabled="disabled" class="bpm-readout" id="bpmReadout">
@@ -43,56 +40,41 @@
                 <button onclick="speedUp()" class="btn btn-success glyphicon glyphicon-arrow-up btn-block"></button>
                 <br>
                 <button onclick="slowDown()" class="btn btn-danger glyphicon glyphicon-arrow-down btn-block"></button>
-
-
             </div>
-
         </div>
+
         <br>
 
         <div class="row">
-
-
             <p class="sub-title">Pattern</p>
-
-
-
-
-            <div class="btn-group btn-group-justified" data-toggle="buttons">
-
+            <div class="btn-group btn-group-justified" data-toggle="buttons" id="patternButtons">
                 <label class="btn btn-success active">
                     <input type="radio" name="options" id="pattern1" autocomplete="off" onchange="changePattern(0)">
                     <span class="glyphicon glyphicon-ok"></span>
                 </label>
-
                 <label class="btn btn-primary">
                     <input type="radio" name="options" id="pattern2" autocomplete="off" onchange="changePattern(1)">
                     <span class="glyphicon glyphicon-ok"></span>
                 </label>
-
                 <label class="btn btn-info">
                     <input type="radio" name="options" id="pattern3" autocomplete="off" onchange="changePattern(2)">
                     <span class="glyphicon glyphicon-ok"></span>
                 </label>
-
                 <label class="btn btn-default">
                     <input type="radio" name="options" id="pattern4" autocomplete="off" onchange="changePattern(3)">
                     <span class="glyphicon glyphicon-ok"></span>
                 </label>
-
                 <label class="btn btn-warning btn-large">
                     <input type="radio" name="options" id="pattern5" autocomplete="off" onchange="changePattern(4)">
                     <span class="glyphicon glyphicon-ok"></span>
                 </label>
-
                 <label class="btn btn-danger">
-                    <input type="radio" name="options" id="pattern6" autocomplete="off" onchange="changePattern(5)"> 
+                    <input type="radio" name="options" id="pattern6" autocomplete="off" onchange="changePattern(5)">
                     <span class="glyphicon glyphicon-ok"></span>
                 </label>
-
             </div>
-
         </div>
+
         <br>
 
         <div class="row">
@@ -102,7 +84,7 @@
                     <tbody>
                         <tr>
                             <td colspan="6">
-                                <input  class="jscolor" value="" id="colorValue0" onchange='changeColor()'>
+                                <input class="jscolor" value="" id="colorValue0" onchange='changeColor()'>
                             </td>
                             <td colspan="6">
                                 <input class="jscolor" value="" id="colorValue1" onchange='changeColor()'>
@@ -134,14 +116,10 @@
                         </tr>
                     </tbody>
                 </table>
-
             </div>
-
-
 
             <div class="row">
                 <p class="sub-title">Controls</p>
-
                 <div class="container-fluid col-xs-6 fade-toggle">
                     <input type="checkbox" class="align-middle fade-toggle" id="toggle-cycling" data-toggle="toggle"
                         data-on="CYCLING ON" data-off="CYCLING OFF" data-size="mini" data-width="80%" data-height="98px"
