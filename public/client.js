@@ -57,6 +57,7 @@ function setColorsView(pattern) {
     }
 }
 
+/** Doesn't work */
 function setActivePatternButton() {
     var btnContainer = document.getElementById("patternButtons");
 
