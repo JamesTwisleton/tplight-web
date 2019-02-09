@@ -14,7 +14,7 @@ var socket;
 window.onload = function () {
     bpmReadout = document.getElementById("bpmReadout");
     bpmReadout.value = "?";
-    socket = io.connect('http://192.168.1.2');
+    socket = io.connect('http://192.168.1.15');
     socket.on('init', function (data) {
         initElements(data);
     });
