@@ -18,7 +18,8 @@ window.onload = function () {
     socket.on('init', function (data) {
         initElements(data);
     });
-    socket.on('bpmUpdate', function (data) {
+    socket.on('bpmupdate', function (data) {
+        console.log("bpm update");
         setBpm(data);
     });
     socket.on('cyclingupdate', function (data) {

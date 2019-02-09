@@ -18,7 +18,7 @@ const bulb = [config.colorBulbIP];
 const port_no = config.portNumber;
 const light = new TPLSmartDevice(bulb[0]);
 var patterns = config.patterns;
-var cyclingOn = true;
+var cyclingOn = false;
 var fadeOn = false;
 var currentPattern = 0;
 var bpm = 60;
@@ -84,7 +84,6 @@ function slow_down() {
         fade = Math.round(transition / fadeRatio);
         console.log("Slowing down to " + bpm + " bpm.");    
         io.sockets.emit('bpmupdate', bpm);
-
     }
 }
 
@@ -105,7 +104,7 @@ function cycle() {
 }
 
 function run_pattern(pattern) {
-    for (i = 0; i < 8; i++) {
+    for (var i = 0; i < 8; i++) {
         change_color(patterns[pattern][i]);
         sleep(transition);
     }
