@@ -54,6 +54,22 @@ io.on('connection', function (socket) {
     socket.on('cyclingoff', function (data) {
         cyclingOn = false;
     });
+    socket.on('togglecycling', function (data) {
+        if(cyclingOn){
+            cyclingOn = false;
+        }else{
+            cyclingOn = true;
+            cycle();
+        }
+    });
+
+    socket.on('togglefade', function (data) {
+        if(fadeOn){
+            fade_off();
+        }else{
+            fade_on();
+        }
+    });
     socket.on('fadeon', function (data) {
         fade_on();
     });
@@ -105,8 +121,10 @@ function cycle() {
 
 function run_pattern(pattern) {
     for (var i = 0; i < 8; i++) {
-        change_color(patterns[pattern][i]);
-        sleep(transition);
+        if(cyclingOn){
+            change_color(patterns[pattern][i]);
+            sleep(transition);
+        }
     }
 }
 

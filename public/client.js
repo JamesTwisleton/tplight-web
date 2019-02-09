@@ -43,8 +43,8 @@ function initElements(serverValues) {
     currentPattern = serverValues.currentPattern;
     setBpmView(bpm);
     setColorsView(currentPattern);
-    setCyclingToggle(cycling);
-    setFadeToggle(fade);
+    //setCyclingToggle(cycling);
+    //setFadeToggle(fade);
 }
 
 function setBpmView(bpm) {
@@ -113,6 +113,14 @@ function cyclingOn() {
 
 function cyclingOff() {
     socket.emit('cyclingoff');
+}
+
+function toggleCycling() {
+    socket.emit('togglecycling');
+}
+
+function toggleFade() {
+    socket.emit('togglefade');
 }
 
 function fadeOn() {
