@@ -1,4 +1,4 @@
-# tplight-web
+# tplight-web 
 ## a web interface for controlling tplink lightbulbs.
 ![frontend image 0](images/frontend0.png)
 
@@ -11,7 +11,7 @@ Set [`colorBulbIP`](https://github.com/JamesTwisleton/tplight-web/blob/7e3ee072e
 #### Installation
 Install [Node.js](https://nodejs.org/en/) and [npm](https://www.npmjs.com/)
 
-`npm install` to install
+`npm install` to install.
 
 
 #### Deployment
