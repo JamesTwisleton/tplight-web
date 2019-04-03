@@ -13,6 +13,7 @@ Install [Node.js](https://nodejs.org/en/) and [npm](https://www.npmjs.com/)
 
 `npm install` to install.-
 
+Added stuff
 
 #### Deployment
 `sudo node server.js` to deploy a server on localhost with ability to control [tplink-lightbulb](https://github.com/konsumer/tplink-lightbulb)s. Go to localhost in a browser window to use. 
